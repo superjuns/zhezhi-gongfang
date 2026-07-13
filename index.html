@@ -854,16 +854,34 @@ function foldSideOver(idx, crease, mainIdx, sideIdx, sideOffset, sortedDone){
 
 function finalVerifyFold(){
   verifying=false;
-  const mainStack=stacks[findLargestStack()];
-  if(mainStack) foldPieces.push(mainStack.verts.map(v=>v.slice()));
+  
+  // 用所有折痕线切割原始形状，得到全部碎片后验证全等
+  const origPoly=getShapePoly(game.type);
+  let cutStacks=[{verts:origPoly.slice(),layers:1}];
+  for(const crease of done){
+    const a=crease[0], b=crease[1];
+    const leftS=[], rightS=[];
+    for(const s of cutStacks){
+      const r=splitPoly(s.verts, a, b);
+      if(r && r.left.length>=3 && r.right.length>=3){
+        leftS.push({verts:r.left});
+        rightS.push({verts:r.right});
+      }else{
+        const c=centroid(s.verts);
+        if(side(c,a,b)>=0) leftS.push(s); else rightS.push(s);
+      }
+    }
+    cutStacks=[...leftS,...rightS];
+  }
+  const pieces=cutStacks.map(s=>s.verts);
   
   let allCongruent=true;
-  if(foldPieces.length<2){
+  if(pieces.length<2){
     allCongruent=false;
-  } else {
-    const ref=foldPieces[0];
-    for(let i=1;i<foldPieces.length;i++){
-      if(!polyCongruent(ref, foldPieces[i], 10)){
+  }else{
+    const ref=pieces[0];
+    for(let i=1;i<pieces.length;i++){
+      if(!polyCongruent(ref,pieces[i],10)){
         allCongruent=false; break;
       }
     }
@@ -871,11 +889,11 @@ function finalVerifyFold(){
   
   if(allCongruent){
     hint.className='hint good';
-    hint.textContent=`${foldPieces.length} 片形状大小完全相同！验证通过 ✨`;
+    hint.textContent=`${pieces.length} 片形状大小完全相同！验证通过 ✨`;
     showToast('验证通过！所有碎片全等');
-  } else {
+  }else{
     hint.className='hint';
-    hint.textContent=`${foldPieces.length} 片中有形状不同的，请调整折痕`;
+    hint.textContent=`${pieces.length} 片中有形状不同的，请调整折痕`;
     showToast('验证未通过');
   }
 }
