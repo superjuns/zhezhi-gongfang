@@ -1270,7 +1270,7 @@ document.getElementById('backFreeBtn').onclick = () => {
   switchToFree();
 };
 
-// 答题模式下，验证通过后加分
+// 验证通过后自动进入下一题（自由模式&答题模式均生效）
 const origVerify = verify;
 verify = function() {
   if (verifying) return;
@@ -1285,14 +1285,22 @@ verify = function() {
     const checkInterval = setInterval(() => {
       if (!verifying) {
         clearInterval(checkInterval);
-        if (hint.classList.contains('good') && currentMode === 'challenge' && !challengeEnded) {
-          challengeScore++;
-          updateScore();
-          showToast('+1 次！当前 ' + challengeScore + ' 次');
-          // 自动下一题
-          setTimeout(() => {
-            if (!challengeEnded) newGame();
-          }, 1200);
+        if (hint.classList.contains('good')) {
+          if (currentMode === 'challenge' && !challengeEnded) {
+            challengeScore++;
+            updateScore();
+            showToast('+1 次！当前 ' + challengeScore + ' 次');
+            // 自动下一题
+            setTimeout(() => {
+              if (!challengeEnded) newGame();
+            }, 1200);
+          } else if (currentMode === 'free') {
+            showToast('验证通过！进入下一题');
+            // 自动下一题
+            setTimeout(() => {
+              newGame();
+            }, 1200);
+          }
         }
       }
     }, 200);
