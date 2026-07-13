@@ -1385,12 +1385,11 @@ async function loadRank() {
     for (let i = 0; i < showCount; i++) {
       const item = rankArr[i];
       const isMe = item.name === userName && item.cls === userClass;
-      html += '<div class="rank-item' + (isMe ? ' me' : '') + '">
-        <div class="rank-no">' + (i + 1) + '</div>
-        <div class="rank-name">' + item.name + '<span class="rank-class">' + item.cls + '</span></div>
-        <div class="rank-score">' + item.score + ' 关</div>
-      </div>';
-    }
+      html += `<div class="rank-item ${isMe ? ' me' : ''}">
+        <div class="rank-no">${i+1}</div>
+        <div class="rank-name">${item.name}<span class="rank-class">${item.cls}</span></div>
+        <div class="rank-score">${item.score} 关</div>
+      </div>`;
     rankList.innerHTML = html;
     document.getElementById('rankSub').textContent = `共 ${rankArr.length} 人上榜`;
   } catch (e) {
