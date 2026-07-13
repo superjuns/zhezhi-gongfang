@@ -1390,6 +1390,7 @@ async function loadRank() {
         <div class="rank-name">${item.name}<span class="rank-class">${item.cls}</span></div>
         <div class="rank-score">${item.score} 关</div>
       </div>`;
+    }
     rankList.innerHTML = html;
     document.getElementById('rankSub').textContent = `共 ${rankArr.length} 人上榜`;
   } catch (e) {
