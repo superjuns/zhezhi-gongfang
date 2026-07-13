@@ -1129,6 +1129,55 @@ const inputClass = document.getElementById('inputClass');
 const inputName = document.getElementById('inputName');
 const nameError = document.getElementById('nameError');
 
+// 读取URL参数
+function getUrlParam(name) {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name) || '';
+}
+
+// 白名单校验（复用）
+async function verifyWhitelist(cls, name) {
+  const res = await fetch(WHITELIST_API);
+  const data = await res.json();
+  const list = data.submissions || [];
+  const norm = s => String(s).replace(/班/g, '').replace(/\s/g, '').toLowerCase();
+  for (const s of list) {
+    const sName = s.name || s['姓名'] || '';
+    const sClass = s.class || s['班级'] || s.className || '';
+    if (norm(sName) === norm(name) && norm(sClass) === norm(cls)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// URL参数自动登录（平台跳转时免输入）
+async function tryAutoLoginFromUrl() {
+  const cls = getUrlParam('class') || getUrlParam('cls') || getUrlParam('班级');
+  const name = getUrlParam('name') || getUrlParam('姓名');
+  if (!cls || !name) return false;
+
+  // 规范化：如果班级是纯数字，自动补"班"字
+  const normCls = /^\d+$/.test(cls) ? cls + '班' : cls;
+
+  try {
+    const ok = await verifyWhitelist(normCls, name);
+    if (!ok) return false;
+
+    // 保存到本地
+    localStorage.setItem('origami_class', normCls);
+    localStorage.setItem('origami_name', name);
+    userName = name;
+    userClass = normCls;
+
+    hideNameModal();
+    startChallenge();
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 function showNameModal() {
   nameError.textContent = '';
   // 恢复上次填写的
@@ -1159,19 +1208,7 @@ document.getElementById('startChallengeBtn').onclick = async () => {
   // 校验白名单
   nameError.textContent = '验证中...';
   try {
-    const res = await fetch(WHITELIST_API);
-    const data = await res.json();
-    const list = data.submissions || [];
-    let found = false;
-    for (const s of list) {
-      const norm = s => String(s).replace(/班/g, '').replace(/\s/g, '').toLowerCase();
-      const sName = s.name || s['姓名'] || '';
-      const sClass = s.class || s['班级'] || s.className || '';
-      if (norm(sName) === norm(name) && norm(sClass) === norm(cls)) {
-        found = true;
-        break;
-      }
-    }
+    const found = await verifyWhitelist(cls, name);
     if (!found) {
       nameError.textContent = '未找到该学生，请检查班级姓名';
       return;
@@ -1468,5 +1505,8 @@ async function loadRank() {
 
 newGame();
 loadRank();
+
+// URL参数自动登录（平台跳转时免输入，直接进入答题模式）
+tryAutoLoginFromUrl();
 })();
 </script></body></html>
