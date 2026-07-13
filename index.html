@@ -135,7 +135,12 @@ function getShapePoly(type){
     return [[.28*W,.15*H],[.84*W,.15*H],[.72*W,.85*H],[.16*W,.85*H]];
   }
   if(type==='tri'){
-    return [[.5*W,.12*H],[.84*W,.86*H],[.16*W,.86*H]];
+    // 等边三角形：底边水平，顶点在上
+    // 高 = 0.74*H = 518，边长 = 518*2/√3 ≈ 598
+    const topY=.12*H, botY=.86*H, cx=.5*W;
+    const h=botY-topY;
+    const halfBase=h/Math.sqrt(3);
+    return [[cx,topY],[cx+halfBase,botY],[cx-halfBase,botY]];
   }
   if(type==='hexagon'){
     const cx=.5*W,cy=.5*H,r=Math.min(.35*W,.38*H);
