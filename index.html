@@ -1109,9 +1109,10 @@ document.getElementById('startChallengeBtn').onclick = async () => {
     const list = data.submissions || [];
     let found = false;
     for (const s of list) {
+      const norm = s => String(s).replace(/班/g, '').replace(/\s/g, '').toLowerCase();
       const sName = s.name || s['姓名'] || '';
       const sClass = s.class || s['班级'] || s.className || '';
-      if (sName === name && (sClass === cls || sClass === cls.replace('班', ''))) {
+      if (norm(sName) === norm(name) && norm(sClass) === norm(cls)) {
         found = true;
         break;
       }
