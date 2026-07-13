@@ -42,52 +42,52 @@ let scissors=null;
 const tasks=[
   // ===== 折纸类：3D翻折动画，累积折叠 =====
   // —— 入门 ——
-  {name:'正方形·横折两半',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的长方形',type:'square',mode:'fold'},
-  {name:'正方形·对角两半',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的三角形',type:'square',mode:'fold'},
-  {name:'长方形·竖折两半',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的小长方形',type:'rect',mode:'fold'},
-  {name:'长方形·对角两半',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的三角形',type:'rect',mode:'fold'},
-  {name:'三角形·对半折',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的三角形',type:'tri',mode:'fold'},
-  {name:'等腰梯形·中分折',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的直角梯形',type:'trapezoid',mode:'fold'},
-  {name:'正六边形·竖折两半',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的五边形',type:'hexagon',mode:'fold'},
-  {name:'菱形·竖折两半',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的三角形',type:'rhombus',mode:'fold'},
+  {name:'正方形·横折两半',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的长方形',type:'square',mode:'fold',creases:1,pieces:2},
+  {name:'正方形·对角两半',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的三角形',type:'square',mode:'fold',creases:1,pieces:2},
+  {name:'长方形·竖折两半',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的小长方形',type:'rect',mode:'fold',creases:1,pieces:2},
+  {name:'长方形·对角两半',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的三角形',type:'rect',mode:'fold',creases:1,pieces:2},
+  {name:'三角形·对半折',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的三角形',type:'tri',mode:'fold',creases:1,pieces:2},
+  {name:'等腰梯形·中分折',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的直角梯形',type:'trapezoid',mode:'fold',creases:1,pieces:2},
+  {name:'正六边形·竖折两半',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的五边形',type:'hexagon',mode:'fold',creases:1,pieces:2},
+  {name:'菱形·竖折两半',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的三角形',type:'rhombus',mode:'fold',creases:1,pieces:2},
   // —— 进阶 ——
-  {name:'正方形·四方折',goal:'画 <b>2 条折痕</b>，分出 <b>4 个形状大小相同</b> 的小正方形',type:'square',mode:'fold'},
-  {name:'正方形·三角四等',goal:'画 <b>2 条折痕</b>，分出 <b>4 个形状大小相同</b> 的三角形',type:'square',mode:'fold'},
-  {name:'长方形·四格折',goal:'画 <b>2 条折痕</b>，分出 <b>4 个形状大小相同</b> 的小长方形',type:'rect',mode:'fold'},
-  {name:'三角形·四小折',goal:'画 <b>3 条折痕</b>，分出 <b>4 个形状大小相同</b> 的小三角形',type:'tri',mode:'fold'},
-  {name:'平行四边形·四等折',goal:'画 <b>2 条折痕</b>，分出 <b>4 个形状大小相同</b> 的小平行四边形',type:'para',mode:'fold'},
-  {name:'菱形·四等三角折',goal:'画 <b>2 条折痕</b>，分出 <b>4 个形状大小相同</b> 的直角三角形',type:'rhombus',mode:'fold'},
-  {name:'正六边形·六三角',goal:'画 <b>3 条折痕</b>，分出 <b>6 个形状大小相同</b> 的三角形',type:'hexagon',mode:'fold'},
-  {name:'正六边形·六四边形',goal:'画 <b>3 条折痕</b>，分出 <b>6 个形状大小相同</b> 的四边形',type:'hexagon',mode:'fold'},
+  {name:'正方形·四方折',goal:'画 <b>2 条折痕</b>，分出 <b>4 个形状大小相同</b> 的小正方形',type:'square',mode:'fold',creases:2,pieces:4},
+  {name:'正方形·三角四等',goal:'画 <b>2 条折痕</b>，分出 <b>4 个形状大小相同</b> 的三角形',type:'square',mode:'fold',creases:2,pieces:4},
+  {name:'长方形·四格折',goal:'画 <b>2 条折痕</b>，分出 <b>4 个形状大小相同</b> 的小长方形',type:'rect',mode:'fold',creases:2,pieces:4},
+  {name:'三角形·四小折',goal:'画 <b>3 条折痕</b>，分出 <b>4 个形状大小相同</b> 的小三角形',type:'tri',mode:'fold',creases:3,pieces:4},
+  {name:'平行四边形·四等折',goal:'画 <b>2 条折痕</b>，分出 <b>4 个形状大小相同</b> 的小平行四边形',type:'para',mode:'fold',creases:2,pieces:4},
+  {name:'菱形·四等三角折',goal:'画 <b>2 条折痕</b>，分出 <b>4 个形状大小相同</b> 的直角三角形',type:'rhombus',mode:'fold',creases:2,pieces:4},
+  {name:'正六边形·六三角',goal:'画 <b>3 条折痕</b>，分出 <b>6 个形状大小相同</b> 的三角形',type:'hexagon',mode:'fold',creases:3,pieces:6},
+  {name:'正六边形·六四边形',goal:'画 <b>3 条折痕</b>，分出 <b>6 个形状大小相同</b> 的四边形',type:'hexagon',mode:'fold',creases:3,pieces:6},
   // —— 挑战 ——
-  {name:'正方形·米字八三角',goal:'画 <b>4 条折痕</b>，分出 <b>8 个形状大小相同</b> 的直角三角形',type:'square',mode:'fold'},
-  {name:'菱形·八等三角',goal:'画 <b>4 条折痕</b>，分出 <b>8 个形状大小相同</b> 的直角三角形',type:'rhombus',mode:'fold'},
-  {name:'正六边形·十二等',goal:'画 <b>6 条折痕</b>，分出 <b>12 个形状大小相同</b> 的直角三角形',type:'hexagon',mode:'fold'},
-  {name:'平行四边形·对角两半',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的三角形',type:'para',mode:'fold'},
-  {name:'三角形·六等折',goal:'画 <b>3 条折痕</b>，分出 <b>6 个形状大小相同</b> 的直角三角形',type:'tri',mode:'fold'},
+  {name:'正方形·米字八三角',goal:'画 <b>4 条折痕</b>，分出 <b>8 个形状大小相同</b> 的直角三角形',type:'square',mode:'fold',creases:4,pieces:8},
+  {name:'菱形·八等三角',goal:'画 <b>4 条折痕</b>，分出 <b>8 个形状大小相同</b> 的直角三角形',type:'rhombus',mode:'fold',creases:4,pieces:8},
+  {name:'正六边形·十二等',goal:'画 <b>6 条折痕</b>，分出 <b>12 个形状大小相同</b> 的直角三角形',type:'hexagon',mode:'fold',creases:6,pieces:12},
+  {name:'平行四边形·对角两半',goal:'画 <b>1 条折痕</b>，分出 <b>2 个形状大小相同</b> 的三角形',type:'para',mode:'fold',creases:1,pieces:2},
+  {name:'三角形·六等折',goal:'画 <b>3 条折痕</b>，分出 <b>6 个形状大小相同</b> 的直角三角形',type:'tri',mode:'fold',creases:3,pieces:6},
 
   // ===== 裁剪类：剪刀动画，碎片全等验证 =====
   // —— 入门 ——
-  {name:'长方形·竖剪两半',goal:'画 <b>1 条线</b>，剪出 <b>2 个形状大小相同</b> 的小长方形',type:'rect',mode:'cut'},
-  {name:'长方形·对角剪',goal:'画 <b>1 条线</b>，剪出 <b>2 个形状大小相同</b> 的三角形',type:'rect',mode:'cut'},
-  {name:'等腰梯形·中分剪',goal:'画 <b>1 条线</b>，剪出 <b>2 个形状大小相同</b> 的直角梯形',type:'trapezoid',mode:'cut'},
-  {name:'圆形·对半剪',goal:'画 <b>1 条线</b>，剪出 <b>2 个形状大小相同</b> 的半圆',type:'circle',mode:'cut'},
+  {name:'长方形·竖剪两半',goal:'画 <b>1 条线</b>，剪出 <b>2 个形状大小相同</b> 的小长方形',type:'rect',mode:'cut',creases:1,pieces:2},
+  {name:'长方形·对角剪',goal:'画 <b>1 条线</b>，剪出 <b>2 个形状大小相同</b> 的三角形',type:'rect',mode:'cut',creases:1,pieces:2},
+  {name:'等腰梯形·中分剪',goal:'画 <b>1 条线</b>，剪出 <b>2 个形状大小相同</b> 的直角梯形',type:'trapezoid',mode:'cut',creases:1,pieces:2},
+  {name:'圆形·对半剪',goal:'画 <b>1 条线</b>，剪出 <b>2 个形状大小相同</b> 的半圆',type:'circle',mode:'cut',creases:1,pieces:2},
   // —— 进阶 ——
-  {name:'正方形·方四剪',goal:'画 <b>2 条线</b>，剪出 <b>4 个形状大小相同</b> 的小正方形',type:'square',mode:'cut'},
-  {name:'正方形·角四剪',goal:'画 <b>2 条线</b>，剪出 <b>4 个形状大小相同</b> 的三角形',type:'square',mode:'cut'},
-  {name:'长方形·四格剪',goal:'画 <b>2 条线</b>，剪出 <b>4 个形状大小相同</b> 的小长方形',type:'rect',mode:'cut'},
-  {name:'圆形·四等扇',goal:'画 <b>2 条线</b>，剪出 <b>4 个形状大小相同</b> 的扇形',type:'circle',mode:'cut'},
-  {name:'圆形·八等扇',goal:'画 <b>4 条线</b>，剪出 <b>8 个形状大小相同</b> 的扇形',type:'circle',mode:'cut'},
-  {name:'正三角形·四等剪',goal:'画 <b>3 条线</b>，剪出 <b>4 个形状大小相同</b> 的小三角形',type:'tri',mode:'cut'},
-  {name:'正六边形·六边剪',goal:'画 <b>3 条线</b>，剪出 <b>6 个形状大小相同</b> 的四边形',type:'hexagon',mode:'cut'},
-  {name:'正六边形·六三角剪',goal:'画 <b>3 条线</b>，剪出 <b>6 个形状大小相同</b> 的三角形',type:'hexagon',mode:'cut'},
-  {name:'平行四边形·四等剪',goal:'画 <b>2 条线</b>，剪出 <b>4 个形状大小相同</b> 的小平行四边形',type:'para',mode:'cut'},
-  {name:'菱形·四等剪',goal:'画 <b>2 条线</b>，剪出 <b>4 个形状大小相同</b> 的直角三角形',type:'rhombus',mode:'cut'},
+  {name:'正方形·方四剪',goal:'画 <b>2 条线</b>，剪出 <b>4 个形状大小相同</b> 的小正方形',type:'square',mode:'cut',creases:2,pieces:4},
+  {name:'正方形·角四剪',goal:'画 <b>2 条线</b>，剪出 <b>4 个形状大小相同</b> 的三角形',type:'square',mode:'cut',creases:2,pieces:4},
+  {name:'长方形·四格剪',goal:'画 <b>2 条线</b>，剪出 <b>4 个形状大小相同</b> 的小长方形',type:'rect',mode:'cut',creases:2,pieces:4},
+  {name:'圆形·四等扇',goal:'画 <b>2 条线</b>，剪出 <b>4 个形状大小相同</b> 的扇形',type:'circle',mode:'cut',creases:2,pieces:4},
+  {name:'圆形·八等扇',goal:'画 <b>4 条线</b>，剪出 <b>8 个形状大小相同</b> 的扇形',type:'circle',mode:'cut',creases:4,pieces:8},
+  {name:'正三角形·四等剪',goal:'画 <b>3 条线</b>，剪出 <b>4 个形状大小相同</b> 的小三角形',type:'tri',mode:'cut',creases:3,pieces:4},
+  {name:'正六边形·六边剪',goal:'画 <b>3 条线</b>，剪出 <b>6 个形状大小相同</b> 的四边形',type:'hexagon',mode:'cut',creases:3,pieces:6},
+  {name:'正六边形·六三角剪',goal:'画 <b>3 条线</b>，剪出 <b>6 个形状大小相同</b> 的三角形',type:'hexagon',mode:'cut',creases:3,pieces:6},
+  {name:'平行四边形·四等剪',goal:'画 <b>2 条线</b>，剪出 <b>4 个形状大小相同</b> 的小平行四边形',type:'para',mode:'cut',creases:2,pieces:4},
+  {name:'菱形·四等剪',goal:'画 <b>2 条线</b>，剪出 <b>4 个形状大小相同</b> 的直角三角形',type:'rhombus',mode:'cut',creases:2,pieces:4},
   // —— 挑战 ——
-  {name:'正方形·米字八剪',goal:'画 <b>4 条线</b>，剪出 <b>8 个形状大小相同</b> 的直角三角形',type:'square',mode:'cut'},
-  {name:'菱形·八等剪',goal:'画 <b>4 条线</b>，剪出 <b>8 个形状大小相同</b> 的直角三角形',type:'rhombus',mode:'cut'},
-  {name:'正六边形·十二等剪',goal:'画 <b>6 条线</b>，剪出 <b>12 个形状大小相同</b> 的直角三角形',type:'hexagon',mode:'cut'},
-  {name:'三角形·六等剪',goal:'画 <b>3 条线</b>，剪出 <b>6 个形状大小相同</b> 的直角三角形',type:'tri',mode:'cut'}
+  {name:'正方形·米字八剪',goal:'画 <b>4 条线</b>，剪出 <b>8 个形状大小相同</b> 的直角三角形',type:'square',mode:'cut',creases:4,pieces:8},
+  {name:'菱形·八等剪',goal:'画 <b>4 条线</b>，剪出 <b>8 个形状大小相同</b> 的直角三角形',type:'rhombus',mode:'cut',creases:4,pieces:8},
+  {name:'正六边形·十二等剪',goal:'画 <b>6 条线</b>，剪出 <b>12 个形状大小相同</b> 的直角三角形',type:'hexagon',mode:'cut',creases:6,pieces:12},
+  {name:'三角形·六等剪',goal:'画 <b>3 条线</b>，剪出 <b>6 个形状大小相同</b> 的直角三角形',type:'tri',mode:'cut',creases:3,pieces:6}
 ];
 
 /* ===== 基础几何 ===== */
@@ -857,6 +857,14 @@ function foldSideOver(idx, crease, mainIdx, sideIdx, sideOffset, sortedDone){
 function finalVerifyFold(){
   verifying=false;
   
+  // 先检查折痕数量
+  if(game.creases && done.length !== game.creases){
+    hint.className='hint';
+    hint.textContent=`需要画 ${game.creases} 条折痕，当前画了 ${done.length} 条`;
+    showToast('折痕数量不对');
+    return;
+  }
+  
   // 用所有折痕线切割原始形状，得到全部碎片后验证全等
   const origPoly=getShapePoly(game.type);
   let cutStacks=[{verts:origPoly.slice(),layers:1}];
@@ -876,6 +884,14 @@ function finalVerifyFold(){
     cutStacks=[...leftS,...rightS];
   }
   const pieces=cutStacks.map(s=>s.verts);
+  
+  // 检查碎片数量
+  if(game.pieces && pieces.length !== game.pieces){
+    hint.className='hint';
+    hint.textContent=`应该分成 ${game.pieces} 片，当前是 ${pieces.length} 片，请调整折痕位置`;
+    showToast('碎片数量不对');
+    return;
+  }
   
   let allCongruent=true;
   if(pieces.length<2){
@@ -956,10 +972,23 @@ function scatterAndVerify(){
       stacks[i].offset[1]=offsets[i][1]*e;
     }
   }, ()=>{
-    const allCongruent = allPiecesCongruent();
-    
     setTimeout(()=>{
       verifying=false;
+      // 检查裁剪线数量
+      if(game.creases && done.length !== game.creases){
+        hint.className='hint';
+        hint.textContent=`需要画 ${game.creases} 条线，当前画了 ${done.length} 条`;
+        showToast('线条数量不对');
+        return;
+      }
+      // 检查碎片数量
+      if(game.pieces && stacks.length !== game.pieces){
+        hint.className='hint';
+        hint.textContent=`应该剪出 ${game.pieces} 片，当前是 ${stacks.length} 片，请调整裁剪线位置`;
+        showToast('碎片数量不对');
+        return;
+      }
+      const allCongruent = allPiecesCongruent();
       if(allCongruent){
         hint.className='hint good';
         hint.textContent=`全部重合！${stacks.length} 片形状完全相同 ✨`;
@@ -1423,5 +1452,1371 @@ async function loadRank() {
 // 保持原有tip功能，不额外加逻辑
 
 newGame();
+loadRank();
+})();
+</script></body></html>
+/* ===== 基础几何 ===== */
+const W=1000, H=700;
+function pt(p){return [p[0]*W, p[1]*H]}
+function d(a,b){return Math.hypot(a[0]-b[0],a[1]-b[1])}
+function add(a,b){return [a[0]+b[0],a[1]+b[1]]}
+function sub(a,b){return [a[0]-b[0],a[1]-b[1]]}
+function mul(a,s){return [a[0]*s,a[1]*s]}
+function dot(a,b){return a[0]*b[0]+a[1]*b[1]}
+function cross(a,b){return a[0]*b[1]-a[1]*b[0]}
+
+function segIntersect(p1,p2,p3,p4){
+  const d1=sub(p2,p1),d2=sub(p4,p3);
+  const denom=cross(d1,d2);
+  if(Math.abs(denom)<1e-6) return null;
+  const t=cross(sub(p3,p1),d2)/denom;
+  const u=cross(sub(p3,p1),d1)/denom;
+  if(t<-1e-6||t>1+1e-6||u<-1e-6||u>1+1e-6) return null;
+  return add(p1,mul(d1,t));
+}
+
+function side(p,a,b){return cross(sub(b,a),sub(p,a))}
+
+function getShapePoly(type){
+  if(type==='square'){
+    const side=Math.min(.64*W,.70*H);
+    const L=(W-side)/2,R=(W+side)/2,T=(H-side)/2,B=(H+side)/2;
+    return [[L,T],[R,T],[R,B],[L,B]];
+  }
+  if(type==='rect'){
+    const L=.16*W,R=.84*W,T=.15*H,B=.85*H;
+    return [[L,T],[R,T],[R,B],[L,B]];
+  }
+  if(type==='circle'){
+    const cx=.5*W,cy=.5*H,r=.3*W;
+    const verts=[]; const N=72;
+    for(let i=0;i<N;i++){
+      const a=i*Math.PI*2/N;
+      verts.push([cx+Math.cos(a)*r,cy+Math.sin(a)*r]);
+    }
+    return verts;
+  }
+  if(type==='para'){
+    return [[.28*W,.15*H],[.84*W,.15*H],[.72*W,.85*H],[.16*W,.85*H]];
+  }
+  if(type==='tri'){
+    return [[.5*W,.12*H],[.84*W,.86*H],[.16*W,.86*H]];
+  }
+  if(type==='hexagon'){
+    const cx=.5*W,cy=.5*H,r=Math.min(.35*W,.38*H);
+    const verts=[];
+    for(let i=0;i<6;i++){
+      const a=-Math.PI/2+i*Math.PI/3;
+      verts.push([cx+Math.cos(a)*r,cy+Math.sin(a)*r]);
+    }
+    return verts;
+  }
+  if(type==='rhombus'){
+    const cx=.5*W,cy=.5*H;
+    const rx=.32*W,ry=.36*H;
+    return [[cx,cy-ry],[cx+rx,cy],[cx,cy+ry],[cx-rx,cy]];
+  }
+  if(type==='trapezoid'){
+    return [[.30*W,.15*H],[.70*W,.15*H],[.86*W,.85*H],[.14*W,.85*H]];
+  }
+  return [];
+}
+
+// 获取图形吸附点：顶点 + 边中点 + 中心点
+function getSnapPoints(type){
+  const poly=getShapePoly(type);
+  const pts=[];
+  if(type==='circle'){
+    const cx=.5*W,cy=.5*H,r=.3*W;
+    for(let i=0;i<8;i++){
+      const a=i*Math.PI/4;
+      pts.push([cx+Math.cos(a)*r,cy+Math.sin(a)*r]);
+    }
+    pts.push([cx,cy]);
+  } else {
+    for(const p of poly) pts.push(p);
+    for(let i=0;i<poly.length;i++){
+      const p1=poly[i],p2=poly[(i+1)%poly.length];
+      pts.push([(p1[0]+p2[0])/2,(p1[1]+p2[1])/2]);
+    }
+    pts.push(centroid(poly));
+  }
+  return pts;
+}
+
+// 用直线ab把多边形切成两半
+function splitPoly(poly,a,b){
+  const left=[],right=[];
+  let hasLeft=false,hasRight=false;
+  for(let i=0;i<poly.length;i++){
+    const p1=poly[i],p2=poly[(i+1)%poly.length];
+    const s1=side(p1,a,b),s2=side(p2,a,b);
+    if(s1>=-1e-6){left.push(p1);if(s1>1e-6)hasLeft=true;}
+    if(s1<=1e-6){right.push(p1);if(s1<-1e-6)hasRight=true;}
+    // 边从一侧穿到另一侧时直接计算交点（凸多边形保证交点在线段上）
+    if((s1>1e-6&&s2<-1e-6)||(s1<-1e-6&&s2>1e-6)){
+      const t=s1/(s1-s2);
+      const ip=[p1[0]+t*(p2[0]-p1[0]),p1[1]+t*(p2[1]-p1[1])];
+      left.push(ip);right.push(ip);
+    }
+  }
+  if(!hasLeft||!hasRight) return null;
+  function clean(arr){
+    const out=[];
+    for(const p of arr){
+      if(!out.length||d(out[out.length-1],p)>1e-4) out.push(p);
+    }
+    if(out.length>1&&d(out[0],out[out.length-1])<1e-4) out.pop();
+    return out;
+  }
+  return {left:clean(left),right:clean(right)};
+}
+
+function centroid(poly){
+  let cx=0,cy=0,A=0;
+  for(let i=0;i<poly.length;i++){
+    const p1=poly[i],p2=poly[(i+1)%poly.length];
+    const c=cross(p1,p2);
+    A+=c; cx+=(p1[0]+p2[0])*c; cy+=(p1[1]+p2[1])*c;
+  }
+  A/=2; return [cx/(6*A),cy/(6*A)];
+}
+
+// 射线(origin, dir)与多边形边界的第一个交点
+function rayPolyIntersect(origin,dir,poly){
+  let best=null,bestT=Infinity;
+  for(let i=0;i<poly.length;i++){
+    const p1=poly[i],p2=poly[(i+1)%poly.length];
+    const edge=sub(p2,p1);
+    const denom=cross(dir,edge);
+    if(Math.abs(denom)<1e-8) continue;
+    const t=cross(sub(p1,origin),edge)/denom;
+    const u=cross(sub(p1,origin),dir)/denom;
+    if(t>1e-3&&u>=0&&u<=1&&t<bestT){
+      bestT=t; best=add(origin,mul(dir,t));
+    }
+  }
+  return best;
+}
+
+// 判断点p是否接近中心点吸附点
+function nearCenterSnap(p,type){
+  const snaps=getSnapPoints(type);
+  const center=snaps[snaps.length-1];
+  return d(p,center)<30;
+}
+
+// 延长线段到图形边界（如果有端点接近中心点）
+function extendToBoundary(line,type){
+  let [a,b]=line;
+  const poly=getShapePoly(type);
+  let hasCenter=false;
+  if(nearCenterSnap(a,type)){
+    const dir=sub(a,b);
+    const ip=rayPolyIntersect(a,dir,poly);
+    if(ip){a=ip; hasCenter=true;}
+  }
+  if(nearCenterSnap(b,type)){
+    const dir=sub(b,a);
+    const ip=rayPolyIntersect(b,dir,poly);
+    if(ip){b=ip; hasCenter=true;}
+  }
+  return [a,b];
+}
+
+// 点p关于直线ab的镜像
+function mirror(p,a,b){
+  const ab=sub(b,a),ap=sub(p,a);
+  const t=dot(ap,ab)/dot(ab,ab);
+  const foot=add(a,mul(ab,t));
+  return add(foot,sub(foot,p));
+}
+
+function polyMatch(p1,p2,tol){
+  if(p1.length!==p2.length) return false;
+  const n=p1.length, t=tol||5;
+  for(let start=0;start<n;start++){
+    if(d(p1[0],p2[start])>t) continue;
+    let ok=true;
+    for(let i=0;i<n;i++) if(d(p1[i],p2[(start+i)%n])>t){ok=false;break;}
+    if(ok) return true;
+    ok=true;
+    for(let i=0;i<n;i++) if(d(p1[i],p2[(start-i+n)%n])>t){ok=false;break;}
+    if(ok) return true;
+  }
+  return false;
+}
+
+// 形状全等判定：允许任意旋转+翻转
+function polyCongruent(p1,p2,tol){
+  if(p1.length!==p2.length) return false;
+  const n=p1.length, t=tol||8;
+  if(n<3) return false;
+  const c1=centroid(p1), c2=centroid(p2);
+  const a=p1.map(p=>[p[0]-c1[0],p[1]-c1[1]]);
+  const b=p2.map(p=>[p[0]-c2[0],p[1]-c2[1]]);
+  const refAng=Math.atan2(a[1][1]-a[0][1], a[1][0]-a[0][0]);
+  function matchRot(dst){
+    for(let s=0;s<n;s++){
+      const eAng=Math.atan2(dst[(s+1)%n][1]-dst[s][1], dst[(s+1)%n][0]-dst[s][0]);
+      const rot=refAng-eAng, cos=Math.cos(rot), sin=Math.sin(rot);
+      let ok=true;
+      for(let i=0;i<n;i++){
+        const p=dst[(s+i)%n];
+        const x=p[0]*cos-p[1]*sin, y=p[0]*sin+p[1]*cos;
+        if(Math.hypot(x-a[i][0],y-a[i][1])>t){ok=false;break;}
+      }
+      if(ok) return true;
+    }
+    return false;
+  }
+  // 正常全等（旋转匹配）
+  if(matchRot(b)) return true;
+  // 镜像全等：先水平翻转（x取反），再反向遍历恢复缠绕方向，再旋转匹配
+  const bFlip=b.map(p=>[-p[0],p[1]]);
+  const bFlipRev=bFlip.slice().reverse();
+  if(matchRot(bFlipRev)) return true;
+  return false;
+}
+
+/* ===== 裁剪系统 ===== */
+const pieceColors=['#fff8dd','#ffe9c7','#dcefdc','#c7e2d6','#e8dcf0','#f0dce0'];
+
+function initStacks(){
+  stacks=[{
+    verts: getShapePoly(game.type),
+    layers: 1,
+    colorIdx: 0,
+    offset: [0,0],
+    fold: null
+  }];
+}
+
+// 沿一条折痕切开所有纸堆
+function cutAlongCrease(crease){
+  const a=crease[0], b=crease[1];
+  const leftStacks=[], rightStacks=[];
+  for(const s of stacks){
+    const r=splitPoly(s.verts, a, b);
+    if(r && r.left.length>=3 && r.right.length>=3){
+      leftStacks.push({...s, verts:r.left, offset:[0,0], fold:null});
+      rightStacks.push({...s, verts:r.right, offset:[0,0], fold:null});
+    } else {
+      const c=centroid(s.verts);
+      if(side(c,a,b)>=0) leftStacks.push({...s, offset:[0,0], fold:null});
+      else rightStacks.push({...s, offset:[0,0], fold:null});
+    }
+  }
+  return {leftStacks, rightStacks};
+}
+
+/* ===== 绘制 ===== */
+function drawPolyPath(poly){
+  if(poly.length<3) return;
+  x.beginPath();
+  x.moveTo(poly[0][0],poly[0][1]);
+  for(let i=1;i<poly.length;i++) x.lineTo(poly[i][0],poly[i][1]);
+  x.closePath();
+}
+
+function draw(){
+  x.clearRect(0,0,W,H);
+  
+  if(phase==='draw'){
+    const poly=getShapePoly(game.type);
+    x.save();
+    x.shadowColor='rgba(0,0,0,.22)';
+    x.shadowBlur=18; x.shadowOffsetY=8;
+    drawPolyPath(poly);
+    x.fillStyle='#fff8dd'; x.fill();
+    x.shadowColor='transparent';
+    x.strokeStyle='#d8cda8'; x.lineWidth=4; x.stroke();
+    x.restore();
+    
+    drawTargets();
+    for(const line of done) drawCrease(line,false);
+    if(drawing) {
+      const ext=extendToBoundary(drawing,game.type);
+      drawCrease(ext,true);
+    }
+  } else {
+    const list=stacks.map((s,i)=>({s,i})).sort((a,b)=>{
+      const ca=centroid(a.s.verts)[1]+a.s.offset[1];
+      const cb=centroid(b.s.verts)[1]+b.s.offset[1];
+      return ca-cb;
+    });
+    for(const {s} of list){
+      drawStack(s);
+    }
+    
+    if(scissors){
+      drawScissors(scissors);
+    }
+  }
+}
+
+function drawStack(stack){
+  const verts=stack.verts.map(v=>[v[0]+stack.offset[0],v[1]+stack.offset[1]]);
+  const color=pieceColors[stack.colorIdx%pieceColors.length];
+  
+  if(!stack.fold){
+    const layers=Math.min(stack.layers, 4);
+    for(let i=layers-1;i>=0;i--){
+      const off=i*1.5;
+      x.save();
+      if(i===layers-1){
+        x.shadowColor='rgba(0,0,0,.18)';
+        x.shadowBlur=12; x.shadowOffsetY=5;
+      }
+      const vv=verts.map(v=>[v[0]-off, v[1]-off*0.6]);
+      drawPolyPath(vv);
+      x.fillStyle=lightenColor(color, -i*6);
+      x.fill();
+      x.shadowColor='transparent';
+      x.strokeStyle='#c9b890'; x.lineWidth=2; x.stroke();
+      x.restore();
+    }
+    if(stack.layers>1){
+      const c=centroid(verts);
+      x.save();
+      x.fillStyle='rgba(36,61,99,.55)';
+      x.font='bold 16px sans-serif';
+      x.textAlign='center';
+      x.textBaseline='middle';
+      x.fillText('×'+stack.layers, c[0], c[1]);
+      x.restore();
+    }
+  } else {
+    drawFold3D(verts, color, stack.fold, stack.layers);
+  }
+}
+
+function lightenColor(hex, amt){
+  const r=parseInt(hex.slice(1,3),16);
+  const g=parseInt(hex.slice(3,5),16);
+  const b=parseInt(hex.slice(5,7),16);
+  const clamp=v=>Math.max(0,Math.min(255,Math.round(v+amt)));
+  return `rgb(${clamp(r)},${clamp(g)},${clamp(b)})`;
+}
+
+// 3D翻折绘制
+function drawFold3D(verts, color, fold, layers=1){
+  const {a,b,p}=fold;
+  const ang=Math.atan2(b[1]-a[1],b[0]-a[0]);
+  const cosA=Math.cos(ang), sinA=Math.sin(ang);
+  const angle=p*Math.PI;
+  const cosF=Math.cos(angle);
+  const sinF=Math.sin(angle);
+  
+  const transformed=[];
+  for(const v of verts){
+    const dx=v[0]-a[0], dy=v[1]-a[1];
+    const u=dx*cosA+dy*sinA;
+    const vv=-dx*sinA+dy*cosA;
+    const vvFlipped=vv*cosF;
+    const persp=1/(1+Math.abs(vv)*0.0015*sinF);
+    const u2=u*persp;
+    const vv2=vvFlipped*persp;
+    const lift=-Math.abs(vv)*0.25*sinF;
+    const dx2=u2*cosA-vv2*sinA;
+    const dy2=u2*sinA+vv2*cosA+lift;
+    transformed.push([a[0]+dx2, a[1]+dy2]);
+  }
+  
+  if(sinF>0.05){
+    x.save();
+    x.globalAlpha=0.28*sinF;
+    const sh=transformed.map(v=>[v[0]+6*sinF, v[1]+14*sinF]);
+    drawPolyPath(sh);
+    x.fillStyle='#000';
+    x.filter='blur(12px)';
+    x.fill();
+    x.restore();
+  }
+  
+  const nLayers=Math.min(layers,4);
+  for(let i=nLayers-1;i>=0;i--){
+    const off=i*1.2;
+    const vv=transformed.map(v=>[v[0]-off*sinF, v[1]-off*0.5*sinF]);
+    
+    x.save();
+    drawPolyPath(vv);
+    
+    const c=lightenColor(color, -i*6);
+    x.fillStyle=c;
+    x.fill();
+    
+    const perpX=-sinA, perpY=cosA;
+    const gx=a[0]+perpX*W*0.5;
+    const gy=a[1]+perpY*H*0.5;
+    const gx2=a[0]-perpX*W*0.5;
+    const gy2=a[1]-perpY*H*0.5;
+    const grad=x.createLinearGradient(gx,gy,gx2,gy2);
+    
+    if(cosF>=0){
+      grad.addColorStop(0,'rgba(255,255,230,'+(0.3*sinF)+')');
+      grad.addColorStop(0.5,'rgba(255,250,210,0)');
+      grad.addColorStop(1,'rgba(100,70,30,'+(0.12*sinF)+')');
+    } else {
+      grad.addColorStop(0,'rgba(170,130,80,0.28)');
+      grad.addColorStop(0.5,'rgba(210,175,120,0.12)');
+      grad.addColorStop(1,'rgba(255,245,210,0.05)');
+    }
+    x.fillStyle=grad;
+    x.fill();
+    
+    x.strokeStyle='#c9b890';
+    x.lineWidth=2;
+    x.stroke();
+    
+    x.restore();
+  }
+  
+  if(p<0.95){
+    x.save();
+    x.strokeStyle='rgba(229,117,85,0.9)';
+    x.lineWidth=3.5;
+    x.beginPath();
+    x.moveTo(a[0],a[1]);
+    x.lineTo(b[0],b[1]);
+    x.stroke();
+    x.restore();
+  }
+}
+
+function drawTargets(){
+  const snaps=getSnapPoints(game.type);
+  for(const p of snaps){
+    x.beginPath();
+    x.arc(p[0],p[1],7,0,Math.PI*2);
+    x.fillStyle='#e57555'; x.globalAlpha=.55; x.fill(); x.globalAlpha=1;
+  }
+}
+
+function drawCrease(line,live){
+  const [a,b]=line;
+  x.save();
+  x.setLineDash(live?[10,9]:[14,8]);
+  x.lineDashOffset=live?0:6;
+  x.strokeStyle=live?'#e57555':'#c85f4b';
+  x.lineWidth=live?6:5;
+  x.beginPath(); x.moveTo(...a); x.lineTo(...b); x.stroke();
+  x.restore();
+}
+
+// 绘制剪刀图标
+function drawScissors(sc){
+  const {a,b,p}=sc;
+  const cx=a[0]+(b[0]-a[0])*p;
+  const cy=a[1]+(b[1]-a[1])*p;
+  const ang=Math.atan2(b[1]-a[1],b[0]-a[0]);
+  const perpAng=ang+Math.PI/2;
+  
+  const openAng=0.4+Math.sin(p*Math.PI*6)*0.15;
+  const bladeLen=22;
+  const handleLen=18;
+  
+  x.save();
+  x.translate(cx,cy);
+  x.rotate(perpAng);
+  
+  // 左刀片
+  x.save();
+  x.rotate(-openAng);
+  x.strokeStyle='#555';
+  x.lineWidth=4;
+  x.lineCap='round';
+  x.beginPath();
+  x.moveTo(0,0);
+  x.lineTo(0,-bladeLen);
+  x.stroke();
+  // 左把手
+  x.beginPath();
+  x.arc(-6,8,8,Math.PI*0.2,Math.PI*1.2,false);
+  x.stroke();
+  x.restore();
+  
+  // 右刀片
+  x.save();
+  x.rotate(openAng);
+  x.strokeStyle='#777';
+  x.lineWidth=4;
+  x.lineCap='round';
+  x.beginPath();
+  x.moveTo(0,0);
+  x.lineTo(0,-bladeLen);
+  x.stroke();
+  // 右把手
+  x.beginPath();
+  x.arc(6,8,8,Math.PI*-0.2,Math.PI*-1.2,true);
+  x.stroke();
+  x.restore();
+  
+  // 中心铆钉
+  x.fillStyle='#999';
+  x.beginPath();
+  x.arc(0,0,3.5,0,Math.PI*2);
+  x.fill();
+  x.strokeStyle='#666';
+  x.lineWidth=1;
+  x.stroke();
+  
+  x.restore();
+  
+  // 已裁剪的痕迹
+  if(p>0.02){
+    x.save();
+    x.strokeStyle='rgba(255,255,255,0.8)';
+    x.lineWidth=3;
+    x.lineCap='round';
+    x.beginPath();
+    x.moveTo(a[0],a[1]);
+    x.lineTo(cx,cy);
+    x.stroke();
+    x.restore();
+  }
+}
+
+/* ===== 交互 ===== */
+function eventPt(e){
+  const r=c.getBoundingClientRect();
+  return [
+    (e.clientX-r.left)*W/r.width,
+    (e.clientY-r.top)*H/r.height
+  ];
+}
+
+function nearestEnd(p){
+  let best=null,dist=Infinity;
+  const snaps=getSnapPoints(game.type);
+  for(const q of snaps){
+    const z=d(p,q);
+    if(z<dist){dist=z;best=q;}
+  }
+  return dist<80?best:p;
+}
+
+function startDraw(e){
+  if(phase!=='draw') return;
+  e.preventDefault();
+  drawing=[nearestEnd(eventPt(e)),nearestEnd(eventPt(e))];
+  c.setPointerCapture(e.pointerId);
+  c.addEventListener('pointermove',moveDraw);
+  c.addEventListener('pointerup',endDraw,{once:true});
+  c.addEventListener('pointercancel',endDraw,{once:true});
+  draw();
+}
+function moveDraw(e){
+  if(!drawing) return;
+  drawing[1]=nearestEnd(eventPt(e));
+  draw();
+}
+function endDraw(){
+  if(!drawing) return;
+  const a=drawing[0],b=drawing[1];
+  if(d(a,b)<20){ drawing=null; c.removeEventListener('pointermove',moveDraw); draw(); return; }
+  const lineName = game.mode==='fold' ? '折痕' : '裁剪线';
+  const ext=extendToBoundary(drawing,game.type);
+  const dup=done.some(l=>{
+    const da=Math.min(d(l[0],ext[0])+d(l[1],ext[1]), d(l[0],ext[1])+d(l[1],ext[0]));
+    return da<20;
+  });
+  if(dup){
+    hint.textContent=`这条${lineName}已经画过了`;
+  } else {
+    const line=[ext[0].slice(),ext[1].slice()];
+    line.i=done.length;
+    done.push(line);
+    hint.textContent=`已画 ${done.length} 条${lineName}，继续画或点击验证`;
+  }
+  drawing=null;
+  c.removeEventListener('pointermove',moveDraw);
+  draw();
+}
+
+c.addEventListener('pointerdown',startDraw);
+
+/* ===== 动画引擎 ===== */
+function runAnim(duration, update, onEnd){
+  const begun=performance.now();
+  let rafId;
+  anim={stop:()=>cancelAnimationFrame(rafId)};
+  function tick(now){
+    const p=Math.min(1,(now-begun)/duration);
+    update(p);
+    draw();
+    if(p<1){rafId=requestAnimationFrame(tick);}
+    else {anim=null; onEnd&&onEnd();}
+  }
+  rafId=requestAnimationFrame(tick);
+}
+
+function easeOut(t){return 1-Math.pow(1-t,2)}
+function easeInOut(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}
+
+/* ===== 验证流程 ===== */
+
+let foldResults=[];
+let foldPieces=[];
+
+function polyArea(poly){
+  let a=0;
+  for(let i=0;i<poly.length;i++){
+    const p1=poly[i],p2=poly[(i+1)%poly.length];
+    a+=p1[0]*p2[1]-p2[0]*p1[1];
+  }
+  return Math.abs(a)/2;
+}
+
+function stackSize(s){
+  return polyArea(s.verts) * s.layers;
+}
+
+function findLargestStack(){
+  let bestIdx=0, bestSize=0;
+  for(let i=0;i<stacks.length;i++){
+    const sz=stackSize(stacks[i]);
+    if(sz>bestSize){bestSize=sz;bestIdx=i;}
+  }
+  return bestIdx;
+}
+
+// ========== 验证入口 ==========
+function verify(){
+  if(verifying) return;
+  if(done.length<1){
+    const lineName = game.mode==='fold' ? '折痕' : '裁剪线';
+    hint.textContent=`请先画至少一条${lineName}`;
+    return;
+  }
+  verifying=true;
+  hint.className='hint good';
+  foldResults=[];
+  foldPieces=[];
+  
+  initStacks();
+  phase='cutting';
+  
+  if(game.mode==='fold'){
+    processFold(0, done);
+  } else {
+    processCut(0, done);
+  }
+}
+
+// ========== 折纸类流程（累积折叠） ==========
+function processFold(idx, sortedDone){
+  if(idx>=sortedDone.length){
+    finalVerifyFold();
+    return;
+  }
+  
+  const crease=sortedDone[idx];
+  hint.textContent=`第 ${idx+1} 折：裁剪中...`;
+  
+  const mainIdx=findLargestStack();
+  const mainStack=stacks[mainIdx];
+  const a=crease[0], b=crease[1];
+  
+  const r=splitPoly(mainStack.verts, a, b);
+  if(!r || r.left.length<3 || r.right.length<3){
+    hint.textContent=`第 ${idx+1} 折：折痕未切到图形，跳过`;
+    foldResults.push(false);
+    setTimeout(()=>processFold(idx+1, sortedDone), 600);
+    return;
+  }
+  
+  const leftVerts=r.left, rightVerts=r.right;
+  const leftSize=polyArea(leftVerts)*mainStack.layers;
+  const rightSize=polyArea(rightVerts)*mainStack.layers;
+  
+  let mainVerts, sideVerts, mainIsLeft;
+  if(leftSize >= rightSize){
+    mainVerts=leftVerts; sideVerts=rightVerts; mainIsLeft=true;
+  } else {
+    mainVerts=rightVerts; sideVerts=leftVerts; mainIsLeft=false;
+  }
+  
+  const congruent=polyCongruent(mainVerts, sideVerts, 10);
+  foldResults.push(congruent);
+  
+  foldPieces.push(sideVerts.map(v=>v.slice()));
+  
+  const mainStackNew={
+    verts: mainVerts, layers: mainStack.layers,
+    colorIdx: mainStack.colorIdx, offset: [0,0], fold: null
+  };
+  const sideStackNew={
+    verts: sideVerts, layers: mainStack.layers,
+    colorIdx: (mainStack.colorIdx + 1) % pieceColors.length,
+    offset: [0,0], fold: null
+  };
+  
+  const perp=perpDir(a,b);
+  const spreadDir=mainIsLeft ? [-perp[0],-perp[1]] : [perp[0],perp[1]];
+  const spreadDist=35;
+  const sideOffset=[spreadDir[0]*spreadDist, spreadDir[1]*spreadDist];
+  
+  const newStacks=[];
+  for(let i=0;i<stacks.length;i++){
+    if(i===mainIdx){
+      newStacks.push(mainStackNew);
+      newStacks.push(sideStackNew);
+    } else {
+      newStacks.push(stacks[i]);
+    }
+  }
+  stacks=newStacks;
+  const sideIdx=mainIdx+1;
+  
+  runAnim(500, (p)=>{
+    const e=easeOut(p);
+    stacks[sideIdx].offset[0]=sideOffset[0]*e;
+    stacks[sideIdx].offset[1]=sideOffset[1]*e;
+  }, ()=>{
+    hint.textContent=`第 ${idx+1} 折：翻折中...`;
+    setTimeout(()=>{
+      foldSideOver(idx, crease, mainIdx, sideIdx, sideOffset, sortedDone);
+    }, 400);
+  });
+}
+
+function foldSideOver(idx, crease, mainIdx, sideIdx, sideOffset, sortedDone){
+  const a=crease[0], b=crease[1];
+  
+  runAnim(400, (p)=>{
+    const e=easeInOut(p);
+    stacks[sideIdx].offset[0]=sideOffset[0]*(1-e);
+    stacks[sideIdx].offset[1]=sideOffset[1]*(1-e);
+  }, ()=>{
+    stacks[sideIdx].fold={a, b, p:0};
+    
+    runAnim(850, (p)=>{
+      const e=easeInOut(p);
+      stacks[sideIdx].fold.p=e;
+    }, ()=>{
+      const mainS=stacks[mainIdx];
+      const sideS=stacks[sideIdx];
+      
+      const merged={
+        verts: mainS.verts,
+        layers: mainS.layers + sideS.layers,
+        colorIdx: mainS.colorIdx,
+        offset: [0,0], fold: null
+      };
+      
+      const newStacks=[];
+      for(let i=0;i<stacks.length;i++){
+        if(i===mainIdx) newStacks.push(merged);
+        else if(i!==sideIdx) newStacks.push(stacks[i]);
+      }
+      stacks=newStacks;
+      
+      hint.textContent=`第 ${idx+1} 折完成，当前 ${merged.layers} 层`;
+      
+      setTimeout(()=>processFold(idx+1, sortedDone), 450);
+    });
+  });
+}
+
+function finalVerifyFold(){
+  verifying=false;
+  
+  // 先检查折痕数量
+  if(game.creases && done.length !== game.creases){
+    hint.className='hint';
+    hint.textContent=`需要画 ${game.creases} 条折痕，当前画了 ${done.length} 条`;
+    showToast('折痕数量不对');
+    return;
+  }
+  
+  // 用所有折痕线切割原始形状，得到全部碎片后验证全等
+  const origPoly=getShapePoly(game.type);
+  let cutStacks=[{verts:origPoly.slice(),layers:1}];
+  for(const crease of done){
+    const a=crease[0], b=crease[1];
+    const leftS=[], rightS=[];
+    for(const s of cutStacks){
+      const r=splitPoly(s.verts, a, b);
+      if(r && r.left.length>=3 && r.right.length>=3){
+        leftS.push({verts:r.left});
+        rightS.push({verts:r.right});
+      }else{
+        const c=centroid(s.verts);
+        if(side(c,a,b)>=0) leftS.push(s); else rightS.push(s);
+      }
+    }
+    cutStacks=[...leftS,...rightS];
+  }
+  const pieces=cutStacks.map(s=>s.verts);
+  
+  // 检查碎片数量
+  if(game.pieces && pieces.length !== game.pieces){
+    hint.className='hint';
+    hint.textContent=`应该分成 ${game.pieces} 片，当前是 ${pieces.length} 片，请调整折痕位置`;
+    showToast('碎片数量不对');
+    return;
+  }
+  
+  let allCongruent=true;
+  if(pieces.length<2){
+    allCongruent=false;
+  }else{
+    const ref=pieces[0];
+    for(let i=1;i<pieces.length;i++){
+      if(!polyCongruent(ref,pieces[i],10)){
+        allCongruent=false; break;
+      }
+    }
+  }
+  
+  if(allCongruent){
+    hint.className='hint good';
+    hint.textContent=`${pieces.length} 片形状大小完全相同！验证通过 ✨`;
+    showToast('验证通过！所有碎片全等');
+  }else{
+    hint.className='hint';
+    hint.textContent=`${pieces.length} 片中有形状不同的，请调整折痕`;
+    showToast('验证未通过');
+  }
+}
+
+// ========== 裁剪类流程 ==========
+let cutPieces=[];
+
+function processCut(idx, sortedDone){
+  if(idx>=sortedDone.length){
+    scatterAndVerify();
+    return;
+  }
+  
+  const crease=sortedDone[idx];
+  const a=crease[0], b=crease[1];
+  hint.textContent=`第 ${idx+1} 刀：裁剪中...`;
+  
+  scissors={a, b, p:0};
+  
+  runAnim(900, (p)=>{
+    scissors.p=easeInOut(p);
+    if(p>0.2 && !scissors.cutDone){
+      scissors.cutDone=true;
+      doCut(crease);
+    }
+  }, ()=>{
+    scissors=null;
+    setTimeout(()=>processCut(idx+1, sortedDone), 250);
+  });
+}
+
+function doCut(crease){
+  const {leftStacks, rightStacks} = cutAlongCrease(crease);
+  stacks = [...leftStacks, ...rightStacks];
+}
+
+// 所有裁剪完成后，碎片向外散开并验证
+function scatterAndVerify(){
+  const allCenters=stacks.map(s=>centroid(s.verts));
+  let gx=0, gy=0;
+  for(const c of allCenters){gx+=c[0]; gy+=c[1];}
+  gx/=allCenters.length; gy/=allCenters.length;
+  
+  const scatterDist=50;
+  const offsets=stacks.map((s,i)=>{
+    const c=allCenters[i];
+    const dx=c[0]-gx, dy=c[1]-gy;
+    const dist=Math.hypot(dx,dy)||1;
+    return [dx/dist*scatterDist, dy/dist*scatterDist];
+  });
+  
+  hint.textContent='裁剪完成，展开验证...';
+  
+  runAnim(700, (p)=>{
+    const e=easeOut(p);
+    for(let i=0;i<stacks.length;i++){
+      stacks[i].offset[0]=offsets[i][0]*e;
+      stacks[i].offset[1]=offsets[i][1]*e;
+    }
+  }, ()=>{
+    setTimeout(()=>{
+      verifying=false;
+      // 检查裁剪线数量
+      if(game.creases && done.length !== game.creases){
+        hint.className='hint';
+        hint.textContent=`需要画 ${game.creases} 条线，当前画了 ${done.length} 条`;
+        showToast('线条数量不对');
+        return;
+      }
+      // 检查碎片数量
+      if(game.pieces && stacks.length !== game.pieces){
+        hint.className='hint';
+        hint.textContent=`应该剪出 ${game.pieces} 片，当前是 ${stacks.length} 片，请调整裁剪线位置`;
+        showToast('碎片数量不对');
+        return;
+      }
+      const allCongruent = allPiecesCongruent();
+      if(allCongruent){
+        hint.className='hint good';
+        hint.textContent=`全部重合！${stacks.length} 片形状完全相同 ✨`;
+        showToast('验证通过！裁剪后重合');
+      } else {
+        hint.className='hint';
+        hint.textContent='形状不完全相同，请检查裁剪线';
+        showToast('验证未通过');
+      }
+    }, 500);
+  });
+}
+
+function allPiecesCongruent(){
+  if(stacks.length<2) return true;
+  const ref=stacks[0].verts;
+  for(let i=1;i<stacks.length;i++){
+    if(!polyCongruent(ref, stacks[i].verts, 10)) return false;
+  }
+  return true;
+}
+
+function perpDir(a,b){
+  const dx=b[0]-a[0], dy=b[1]-a[1];
+  const len=Math.hypot(dx,dy)||1;
+  return [dy/len, -dx/len];
+}
+
+/* ===== 其他 ===== */
+function showToast(s){
+  toast.textContent=s;toast.classList.add('show');
+  clearTimeout(timer);timer=setTimeout(()=>toast.classList.remove('show'),1800);
+}
+
+function resetGame(){
+  done=[]; stacks=[]; phase='draw'; anim=null; verifying=false; scissors=null;
+  const lineName = game && game.mode==='fold' ? '折痕' : '裁剪线';
+  hint.textContent=`从圆点处开始画线，顶点/边中点/中心都会自动吸附`;
+  hint.className='hint';
+  draw();
+}
+
+function undo(){
+  if(phase!=='draw') return;
+  done.pop();
+  const lineName = game.mode==='fold' ? '折痕' : '裁剪线';
+  hint.textContent=`已画 ${done.length} 条${lineName}`;
+  draw();
+}
+
+function newGame(){
+  if(anim) anim.stop();
+  verifying=false; anim=null; scissors=null;
+  game=tasks[Math.floor(Math.random()*tasks.length)];
+  done=[];n++;
+  roundEl.textContent=`第 ${n} 题`;
+  task.innerHTML=`任务：${game.goal}`;
+  stacks=[]; phase='draw';
+  
+  const lineName = game.mode==='fold' ? '折痕' : '裁剪线';
+  hint.textContent='从圆点处开始画线，顶点/边中点/中心都会自动吸附';
+  hint.className='hint';
+  
+  if(game.mode==='fold'){
+    ruleText.textContent='在图形的圆点之间画出折痕；画好后点击"验证"，折叠后所有部分形状大小相同即为通过。';
+  } else {
+    ruleText.textContent='在图形的圆点之间画出裁剪线；画好后点击"验证"，剪开后所有部分形状大小相同即为通过。';
+  }
+  
+  draw();
+}
+
+document.getElementById('undo').onclick=undo;
+document.getElementById('reset').onclick=resetGame;
+document.getElementById('verify').onclick=verify;
+document.getElementById('next').onclick=newGame;
+
+// ====== 配置 ======
+const WHITELIST_API = 'https://wzkjgz.site/api/5tmbx2o6rg/all';
+const SUBMIT_API = 'https://wzkjgz.site/api/08uh42ddft';
+const RANK_API = SUBMIT_API + '/all';
+const CHALLENGE_SECONDS = 600; // 10分钟
+
+// ====== 状态 ======
+let currentMode = 'free'; // free / challenge
+let userName = '', userClass = '';
+let challengeScore = 0; // 闯关数
+let timeLeft = CHALLENGE_SECONDS;
+let timerInterval = null;
+let challengeEnded = false;
+let submittedToday = false; // 今日是否已提交
+let usedTaskNames = []; // 本轮已出过的题，避免重复
+
+// ====== 北京时间 ======
+function getBeijingTodayStr() {
+  var d = new Date();
+  d.setTime(d.getTime() + 8 * 3600 * 1000);
+  return d.toISOString().slice(0, 10);
+}
+
+// ====== Tab切换 ======
+const tabs = document.querySelectorAll('.tab');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const mode = tab.dataset.mode;
+    if (mode === currentMode) return;
+    if (mode === 'challenge') {
+      showNameModal();
+    } else {
+      switchToFree();
+    }
+  });
+});
+
+function setTabActive(mode) {
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+}
+
+function switchToFree() {
+  currentMode = 'free';
+  setTabActive('free');
+  document.getElementById('challengeHeader').style.display = 'none';
+  stopTimer();
+  challengeEnded = false;
+  challengeScore = 0;
+  n = 0;
+  newGame();
+}
+
+// ====== 白名单弹窗 ======
+const nameModal = document.getElementById('nameModal');
+const inputClass = document.getElementById('inputClass');
+const inputName = document.getElementById('inputName');
+const nameError = document.getElementById('nameError');
+
+function showNameModal() {
+  nameError.textContent = '';
+  // 恢复上次填写的
+  inputClass.value = localStorage.getItem('origami_class') || '';
+  inputName.value = localStorage.getItem('origami_name') || '';
+  nameModal.classList.add('show');
+  setTimeout(() => inputClass.focus(), 100);
+}
+
+function hideNameModal() {
+  nameModal.classList.remove('show');
+}
+
+document.getElementById('cancelChallengeBtn').onclick = () => {
+  hideNameModal();
+};
+
+document.getElementById('startChallengeBtn').onclick = async () => {
+  const cls = inputClass.value.trim();
+  const name = inputName.value.trim();
+  nameError.textContent = '';
+
+  if (!cls || !name) {
+    nameError.textContent = '请填写班级和姓名';
+    return;
+  }
+
+  // 校验白名单
+  nameError.textContent = '验证中...';
+  try {
+    const res = await fetch(WHITELIST_API);
+    const data = await res.json();
+    const list = data.submissions || [];
+    let found = false;
+    for (const s of list) {
+      const norm = s => String(s).replace(/班/g, '').replace(/\s/g, '').toLowerCase();
+      const sName = s.name || s['姓名'] || '';
+      const sClass = s.class || s['班级'] || s.className || '';
+      if (norm(sName) === norm(name) && norm(sClass) === norm(cls)) {
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      nameError.textContent = '未找到该学生，请检查班级姓名';
+      return;
+    }
+  } catch (e) {
+    nameError.textContent = '网络错误，请稍后重试';
+    return;
+  }
+
+  // 保存到本地
+  localStorage.setItem('origami_class', cls);
+  localStorage.setItem('origami_name', name);
+  userName = name;
+  userClass = cls;
+
+  hideNameModal();
+  startChallenge();
+};
+
+// ====== 闯关模式 ======
+function startChallenge() {
+  currentMode = 'challenge';
+  setTabActive('challenge');
+  document.getElementById('challengeHeader').style.display = 'flex';
+
+  challengeScore = 0;
+  timeLeft = CHALLENGE_SECONDS;
+  challengeEnded = false;
+  n = 0;
+  usedTaskNames = [];
+  submittedToday = false;
+
+  updateScore();
+  startTimer();
+  newGame();
+  loadRank();
+}
+
+function updateScore() {
+  document.getElementById('challengeScore').textContent = `已闯关：${challengeScore} 关`;
+}
+
+function startTimer() {
+  stopTimer();
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+    if (timeLeft <= 0) {
+      stopTimer();
+      endChallenge();
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(timeLeft / 60);
+  const s = timeLeft % 60;
+  document.getElementById('timer').textContent =
+    `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  if (timeLeft <= 60) {
+    document.getElementById('timer').style.color = '#e57555';
+  } else {
+    document.getElementById('timer').style.color = '#ffe2a0';
+  }
+}
+
+function endChallenge() {
+  if (challengeEnded) return;
+  challengeEnded = true;
+  stopTimer();
+
+  const endModal = document.getElementById('endModal');
+  document.getElementById('endScore').textContent = challengeScore;
+  document.getElementById('endError').textContent = '';
+  endModal.classList.add('show');
+
+  // 提交成绩
+  submitScore();
+}
+
+document.getElementById('retryBtn').onclick = () => {
+  document.getElementById('endModal').classList.remove('show');
+  startChallenge();
+};
+
+document.getElementById('backFreeBtn').onclick = () => {
+  document.getElementById('endModal').classList.remove('show');
+  switchToFree();
+};
+
+// 闯关模式下，验证通过后加分
+const origVerify = verify;
+verify = function() {
+  if (verifying) return;
+  if (phase !== 'draw') return;
+
+  // 调用原验证逻辑
+  origVerify();
+
+  // 检查是否通过（通过后hint会变good）
+  setTimeout(() => {
+    // 用一个小技巧：在验证动画结束后检查
+    const checkInterval = setInterval(() => {
+      if (!verifying) {
+        clearInterval(checkInterval);
+        if (hint.classList.contains('good') && currentMode === 'challenge' && !challengeEnded) {
+          challengeScore++;
+          updateScore();
+          showToast('+1 关！当前 ' + challengeScore + ' 关');
+          // 自动下一题
+          setTimeout(() => {
+            if (!challengeEnded) newGame();
+          }, 1200);
+        }
+      }
+    }, 200);
+  }, 500);
+};
+
+// 闯关模式下，newGame 要避免重复题
+const origNewGame = newGame;
+newGame = function() {
+  if (currentMode === 'challenge') {
+    // 筛选未出过的题
+    let pool = tasks.filter(t => usedTaskNames.indexOf(t.name) === -1);
+    if (pool.length === 0) {
+      // 全部出过了，重置
+      usedTaskNames = [];
+      pool = tasks.slice();
+    }
+    // 按难度渐变：前期简单题多
+    let easyPool = pool.filter(t => {
+      const goal = t.goal;
+      if (goal.indexOf('1 条') > -1 || goal.indexOf('2 条') > -1) return true;
+      return false;
+    });
+    let hardPool = pool.filter(t => easyPool.indexOf(t) === -1);
+
+    let chosen;
+    if (challengeScore < 5 && easyPool.length > 0) {
+      // 前5关：80%简单
+      if (Math.random() < 0.8 && easyPool.length > 0) {
+        chosen = easyPool[Math.floor(Math.random() * easyPool.length)];
+      } else {
+        chosen = hardPool[Math.floor(Math.random() * hardPool.length)];
+      }
+    } else if (challengeScore < 15 && pool.length > 0) {
+      // 5-15关：50%简单 50%难
+      if (Math.random() < 0.5 && easyPool.length > 0) {
+        chosen = easyPool[Math.floor(Math.random() * easyPool.length)];
+      } else if (hardPool.length > 0) {
+        chosen = hardPool[Math.floor(Math.random() * hardPool.length)];
+      } else {
+        chosen = pool[Math.floor(Math.random() * pool.length)];
+      }
+    } else {
+      chosen = pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    usedTaskNames.push(chosen.name);
+
+    if (anim) anim.stop();
+    verifying = false; anim = null; scissors = null;
+    game = chosen;
+    done = []; n++;
+    roundEl.textContent = `第 ${n} 题`;
+    task.innerHTML = `任务：${game.goal}`;
+    stacks = []; phase = 'draw';
+
+    const lineName = game.mode === 'fold' ? '折痕' : '裁剪线';
+    hint.textContent = '从圆点处开始画线，顶点/边中点/中心都会自动吸附';
+    hint.className = 'hint';
+
+    if (game.mode === 'fold') {
+      ruleText.textContent = '在图形的圆点之间画出折痕；画好后点击"验证"，折叠后所有部分形状大小相同即为通过。';
+    } else {
+      ruleText.textContent = '在图形的圆点之间画出裁剪线；画好后点击"验证"，剪开后所有部分形状大小相同即为通过。';
+    }
+
+    draw();
+  } else {
+    origNewGame();
+  }
+};
+
+// ====== 提交成绩 ======
+async function submitScore() {
+  if (submittedToday) return;
+  submittedToday = true;
+
+  try {
+    const usedTime = CHALLENGE_SECONDS - timeLeft;
+    const res = await fetch(SUBMIT_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        姓名: userName,
+        班级: userClass,
+        闯关数: challengeScore,
+        用时秒: usedTime
+      })
+    });
+    if (res.ok) {
+      document.getElementById('endError').textContent = '成绩已提交';
+      document.getElementById('endError').style.color = '#2ecc71';
+      // 刷新排行榜
+      loadRank();
+    } else {
+      document.getElementById('endError').textContent = '提交失败，请检查网络';
+    }
+  } catch (e) {
+    document.getElementById('endError').textContent = '提交失败，请检查网络';
+  }
+}
+
+// ====== 排行榜 ======
+async function loadRank() {
+  const rankList = document.getElementById('rankList');
+  try {
+    const res = await fetch(RANK_API);
+    const data = await res.json();
+    const subs = data.submissions || [];
+    const today = getBeijingTodayStr();
+
+    // 筛选当天
+    const todaySubs = subs.filter(s => {
+      const t = s.submitted_at || '';
+      return String(t).slice(0, 10) === today;
+    });
+
+    // 每人保留最佳成绩（按姓名+班级分组）
+    const bestMap = {};
+    for (const s of todaySubs) {
+      const name = s.name || s['姓名'] || '';
+      const cls = s.class || s['班级'] || '';
+      const score = parseInt(s.score || s['得分'] || s['闯关数'] || 0);
+      const time = parseInt(s.time || s['用时'] || s['用时秒'] || 99999);
+      const key = name + '|' + cls;
+      if (!bestMap[key] || score > bestMap[key].score || (score === bestMap[key].score && time < bestMap[key].time)) {
+        bestMap[key] = { name, cls, score, time };
+      }
+    }
+
+    // 排序：闯关数降序，用时升序
+    const rankArr = Object.values(bestMap).sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return a.time - b.time;
+    });
+
+    if (rankArr.length === 0) {
+      rankList.innerHTML = '<div class="rank-empty">暂无数据，快来挑战第一名吧~</div>';
+      document.getElementById('rankSub').textContent = '每人仅显示最佳成绩';
+      return;
+    }
+
+    let html = '';
+    const showCount = Math.min(rankArr.length, 10);
+    for (let i = 0; i < showCount; i++) {
+      const item = rankArr[i];
+      const isMe = item.name === userName && item.cls === userClass;
+      html += `<div class="rank-item ${isMe ? ' me' : ''}">
+        <div class="rank-no">${i+1}</div>
+        <div class="rank-name">${item.name}<span class="rank-class">${item.cls}</span></div>
+        <div class="rank-score">${item.score} 关</div>
+      </div>`;
+    }
+    rankList.innerHTML = html;
+    document.getElementById('rankSub').textContent = `共 ${rankArr.length} 人上榜`;
+  } catch (e) {
+    rankList.innerHTML = '<div class="rank-empty">加载失败</div>';
+  }
+}
+
+// 提示本题不算闯关记录（闯关模式下提示按钮）
+// 保持原有tip功能，不额外加逻辑
+
+newGame();
+loadRank();
 })();
 </script></body></html>
