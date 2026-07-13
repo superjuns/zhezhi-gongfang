@@ -188,9 +188,11 @@ function splitPoly(poly,a,b){
     const s1=side(p1,a,b),s2=side(p2,a,b);
     if(s1>=-1e-6){left.push(p1);if(s1>1e-6)hasLeft=true;}
     if(s1<=1e-6){right.push(p1);if(s1<-1e-6)hasRight=true;}
-    if(s1*s2<-1e-10){
-      const ip=segIntersect(p1,p2,a,b);
-      if(ip){left.push(ip);right.push(ip);}
+    // 边从一侧穿到另一侧时直接计算交点（凸多边形保证交点在线段上）
+    if((s1>1e-6&&s2<-1e-6)||(s1<-1e-6&&s2>1e-6)){
+      const t=s1/(s1-s2);
+      const ip=[p1[0]+t*(p2[0]-p1[0]),p1[1]+t*(p2[1]-p1[1])];
+      left.push(ip);right.push(ip);
     }
   }
   if(!hasLeft||!hasRight) return null;
@@ -289,26 +291,26 @@ function polyCongruent(p1,p2,tol){
   const a=p1.map(p=>[p[0]-c1[0],p[1]-c1[1]]);
   const b=p2.map(p=>[p[0]-c2[0],p[1]-c2[1]]);
   const refAng=Math.atan2(a[1][1]-a[0][1], a[1][0]-a[0][0]);
-  for(let s=0;s<n;s++){
-    const eAng=Math.atan2(b[(s+1)%n][1]-b[s][1], b[(s+1)%n][0]-b[s][0]);
-    const rot=refAng-eAng, cos=Math.cos(rot), sin=Math.sin(rot);
-    let ok=true;
-    for(let i=0;i<n;i++){
-      const p=b[(s+i)%n];
-      const x=p[0]*cos-p[1]*sin, y=p[0]*sin+p[1]*cos;
-      if(Math.hypot(x-a[i][0],y-a[i][1])>t){ok=false;break;}
+  function matchRot(dst){
+    for(let s=0;s<n;s++){
+      const eAng=Math.atan2(dst[(s+1)%n][1]-dst[s][1], dst[(s+1)%n][0]-dst[s][0]);
+      const rot=refAng-eAng, cos=Math.cos(rot), sin=Math.sin(rot);
+      let ok=true;
+      for(let i=0;i<n;i++){
+        const p=dst[(s+i)%n];
+        const x=p[0]*cos-p[1]*sin, y=p[0]*sin+p[1]*cos;
+        if(Math.hypot(x-a[i][0],y-a[i][1])>t){ok=false;break;}
+      }
+      if(ok) return true;
     }
-    if(ok) return true;
-    const eAng2=Math.atan2(b[(s-1+n)%n][1]-b[s][1], b[(s-1+n)%n][0]-b[s][0]);
-    const rot2=refAng-eAng2, cos2=Math.cos(rot2), sin2=Math.sin(rot2);
-    ok=true;
-    for(let i=0;i<n;i++){
-      const p=b[(s-i+n)%n];
-      const x=p[0]*cos2-p[1]*sin2, y=p[0]*sin2+p[1]*cos2;
-      if(Math.hypot(x-a[i][0],y-a[i][1])>t){ok=false;break;}
-    }
-    if(ok) return true;
+    return false;
   }
+  // 正常全等（旋转匹配）
+  if(matchRot(b)) return true;
+  // 镜像全等：先水平翻转（x取反），再反向遍历恢复缠绕方向，再旋转匹配
+  const bFlip=b.map(p=>[-p[0],p[1]]);
+  const bFlipRev=bFlip.slice().reverse();
+  if(matchRot(bFlipRev)) return true;
   return false;
 }
 
