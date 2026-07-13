@@ -12,14 +12,16 @@
 .challenge-header{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--board),var(--board2));color:#fff;padding:10px 14px;border-radius:12px;font-size:13px}.challenge-header .timer{font-weight:700;font-size:16px;color:#ffe2a0}.challenge-header .score{font-weight:650}
 /* ===== 排行榜 ===== */
 .rank-section{background:#fff;border-radius:16px;padding:14px;box-shadow:0 4px 14px #243d6310}.rank-title{font-size:15px;font-weight:700;margin:0 0 10px;color:var(--ink);display:flex;justify-content:space-between;align-items:center}.rank-title .sub{font-size:11px;font-weight:500;color:var(--muted)}.rank-list{display:flex;flex-direction:column;gap:6px}.rank-item{display:flex;align-items:center;gap:10px;padding:8px 10px;background:#f6f7f2;border-radius:10px;font-size:13px}.rank-item.me{background:linear-gradient(135deg,#fff8dd,#ffeac8)}.rank-no{width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#e4e9eb;font-size:11px;font-weight:700;color:var(--muted);flex:none}.rank-item:nth-child(1) .rank-no{background:#ffd93d;color:#8a6d00}.rank-item:nth-child(2) .rank-no{background:#c8d6e5;color:#576574}.rank-item:nth-child(3) .rank-no{background:#f0c090;color:#8b5e3c}.rank-name{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rank-class{font-size:11px;color:var(--muted);margin-left:4px}.rank-score{font-weight:700;color:var(--board)}.rank-empty{text-align:center;color:var(--muted);font-size:12px;padding:20px 0}
+/* 排行榜固定在页面底部 */
+.rank-bottom-wrap{max-width:560px;margin:0 auto 24px;padding:0 18px}
 </style>
 </head>
 <body><main class="app"><header><div><p class="eyebrow">PAPER FOLD STUDIO</p><h1 class="title">折纸小工坊</h1></div><div class="round" id="round">第 1 题</div></header>
 <div class="tabs"><div class="tab active" data-mode="free">自由练习</div><div class="tab" data-mode="challenge">闯关模式</div></div>
 <div id="challengeHeader" style="display:none" class="challenge-header"><span class="score" id="challengeScore">已闯关：0 关</span><span class="timer" id="timer">10:00</span></div>
 <section class="board" aria-label="折纸画线游戏"><p class="task" id="task"></p><canvas id="paper" width="1000" height="700" aria-label="在纸张上绘制折痕或裁剪线"></canvas><p class="hint" id="hint">从圆点处开始画线，顶点/边中点/中心都会自动吸附</p></section><div class="controls"><button class="btn secondary" id="undo">撤销</button><button class="btn secondary" id="reset">重来</button><button class="btn primary" id="verify">验证</button><button class="btn secondary" id="next">换任务</button></div><div class="rule"><span class="dot"></span><span id="ruleText">在图形的圆点之间画出裁剪线；画好后点击"验证"，剪开后所有部分形状大小相同即为通过。</span></div>
-<div id="rankSection" style="display:none" class="rank-section"><p class="rank-title">🏆 今日排行榜<span class="sub" id="rankSub">每人仅显示最佳成绩</span></p><div class="rank-list" id="rankList"><div class="rank-empty">加载中...</div></div></div>
-</main><div class="toast" id="toast" role="status"></div>
+</main>
+<div class="rank-bottom-wrap"><div id="rankSection" class="rank-section"><p class="rank-title">🏆 今日排行榜<span class="sub" id="rankSub">每人仅显示最佳成绩</span></p><div class="rank-list" id="rankList"><div class="rank-empty">加载中...</div></div></div></div><div class="toast" id="toast" role="status"></div>
 <!-- 白名单弹窗 -->
 <div class="modal-overlay" id="nameModal"><div class="modal-box"><p class="modal-title">开始闯关</p><p class="modal-sub">请输入班级和姓名，验证后开始10分钟闯关</p><div class="modal-form"><select class="modal-input" id="inputClass"><option value="">请选择班级</option><option value="1班">1班</option><option value="2班">2班</option><option value="3班">3班</option><option value="4班">4班</option><option value="5班">5班</option><option value="6班">6班</option><option value="7班">7班</option></select><input class="modal-input" id="inputName" placeholder="姓名" maxlength="20"><div class="modal-error" id="nameError"></div><button class="modal-btn" id="startChallengeBtn">开始闯关</button><button class="modal-btn secondary" id="cancelChallengeBtn">取消</button></div></div></div>
 <!-- 闯关结束弹窗 -->
@@ -1060,7 +1062,6 @@ function switchToFree() {
   currentMode = 'free';
   setTabActive('free');
   document.getElementById('challengeHeader').style.display = 'none';
-  document.getElementById('rankSection').style.display = 'none';
   stopTimer();
   challengeEnded = false;
   challengeScore = 0;
@@ -1141,7 +1142,6 @@ function startChallenge() {
   currentMode = 'challenge';
   setTabActive('challenge');
   document.getElementById('challengeHeader').style.display = 'flex';
-  document.getElementById('rankSection').style.display = 'block';
 
   challengeScore = 0;
   timeLeft = CHALLENGE_SECONDS;
