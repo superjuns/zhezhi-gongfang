@@ -1293,6 +1293,8 @@ verify = function() {
     }, 200);
   }, 500);
 };
+// 重新绑定按钮，确保走包装后的逻辑
+document.getElementById('verify').onclick = verify;
 
 // 答题模式下，newGame 要避免重复题
 const origNewGame = newGame;
