@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>折纸小工坊</title>
 <style>
-:root{--ink:#243d63;--paper:#f6f7f2;--board:#355a83;--board2:#27496e;--cream:#fff8dd;--line:#e57555;--mint:#a8d4c0;--muted:#718095}*{box-sizing:border-box}body{margin:0;background:var(--paper);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",sans-serif;color:var(--ink);-webkit-tap-highlight-color:transparent}.app{max-width:560px;min-height:100svh;margin:auto;padding:22px 18px calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:16px}header{display:flex;justify-content:space-between;align-items:start}.eyebrow{font-size:12px;letter-spacing:.14em;color:var(--muted);margin:0 0 4px}.title{font-size:25px;letter-spacing:.04em;margin:0}.round{font-size:13px;color:var(--muted);padding-top:5px}.board{background:linear-gradient(140deg,var(--board),var(--board2));border-radius:22px;padding:15px 12px 12px;box-shadow:0 10px 25px #20395118;position:relative;overflow:hidden}.board:before{content:"";position:absolute;inset:8px;border:1px solid #f5f0d735;border-radius:16px;pointer-events:none}.task{position:relative;margin:1px 10px 8px;text-align:center;color:#eff5e9;font-size:15px;line-height:1.5}.task strong{color:#ffe2a0}canvas{display:block;width:100%;height:auto;touch-action:none;user-select:none}.hint{position:relative;margin:5px 0 1px;min-height:19px;text-align:center;color:#dbe9dc;font-size:12px}.hint.good{color:#ffe6a7}.controls{display:grid;grid-template-columns:1fr 1fr;gap:9px}.btn{border:0;border-radius:14px;padding:12px 8px;font:inherit;font-size:14px;font-weight:650;cursor:pointer}.btn:active{transform:scale(.98)}.primary{background:var(--ink);color:#fff}.secondary{background:#e4e9eb;color:var(--ink)}.rule{display:flex;gap:9px;color:var(--muted);font-size:13px;line-height:1.55;padding:0 3px}.dot{width:8px;height:8px;border-radius:50%;background:var(--line);flex:none;margin-top:6px}.toast{position:fixed;left:50%;top:20px;transform:translate(-50%,-140px);background:#27496e;color:#fff6d4;padding:11px 16px;border-radius:99px;font-size:14px;box-shadow:0 8px 22px #243d6338;transition:transform .28s;z-index:3}.toast.show{transform:translate(-50%,0)}@media(max-width:370px){.app{padding-left:12px;padding-right:12px}.title{font-size:22px}.board{padding-left:8px;padding-right:8px;border-radius:18px}}
+:root{--ink:#243d63;--paper:#f6f7f2;--board:#355a83;--board2:#27496e;--cream:#fff8dd;--line:#e57555;--mint:#a8d4c0;--muted:#718095}*{box-sizing:border-box}body{margin:0;background:var(--paper);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",sans-serif;color:var(--ink);-webkit-tap-highlight-color:transparent}.app{max-width:560px;min-height:100svh;margin:auto;padding:22px 18px calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:16px}header{display:flex;justify-content:space-between;align-items:start}.eyebrow{font-size:12px;letter-spacing:.14em;color:var(--muted);margin:0 0 4px}.title{font-size:25px;letter-spacing:.04em;margin:0}.round{font-size:13px;color:var(--muted);padding-top:5px}.board{background:linear-gradient(140deg,var(--board),var(--board2));border-radius:22px;padding:15px 12px 12px;box-shadow:0 10px 25px #20395118;position:relative;overflow:hidden}.board:before{content:"";position:absolute;inset:8px;border:1px solid #f5f0d735;border-radius:16px;pointer-events:none}.task{position:relative;margin:1px 10px 8px;text-align:center;color:#eff5e9;font-size:15px;line-height:1.5}.task strong{color:#ffe2a0}canvas{display:block;width:100%;height:auto;touch-action:pan-y;user-select:none}.hint{position:relative;margin:5px 0 1px;min-height:19px;text-align:center;color:#dbe9dc;font-size:12px}.hint.good{color:#ffe6a7}.controls{display:grid;grid-template-columns:1fr 1fr;gap:9px}.btn{border:0;border-radius:14px;padding:12px 8px;font:inherit;font-size:14px;font-weight:650;cursor:pointer}.btn:active{transform:scale(.98)}.primary{background:var(--ink);color:#fff}.secondary{background:#e4e9eb;color:var(--ink)}.rule{display:flex;gap:9px;color:var(--muted);font-size:13px;line-height:1.55;padding:0 3px}.dot{width:8px;height:8px;border-radius:50%;background:var(--line);flex:none;margin-top:6px}.toast{position:fixed;left:50%;top:20px;transform:translate(-50%,-140px);background:#27496e;color:#fff6d4;padding:11px 16px;border-radius:99px;font-size:14px;box-shadow:0 8px 22px #243d6338;transition:transform .28s;z-index:3}.toast.show{transform:translate(-50%,0)}@media(max-width:370px){.app{padding-left:12px;padding-right:12px}.title{font-size:22px}.board{padding-left:8px;padding-right:8px;border-radius:18px}}
 /* ===== tab切换 ===== */
 .tabs{display:flex;gap:6px;background:#e8ecef;padding:4px;border-radius:12px;margin-bottom:2px}.tab{flex:1;padding:8px 4px;text-align:center;font-size:13px;font-weight:600;color:var(--muted);border-radius:9px;cursor:pointer;transition:all .2s}.tab.active{background:#fff;color:var(--ink);box-shadow:0 2px 6px #243d6315}
 /* ===== 弹窗 ===== */
@@ -636,10 +636,34 @@ function nearestEnd(p){
   return dist<80?best:p;
 }
 
+// 判断点是否在图形内部（多边形用射线法，圆形用距离）
+function pointInShape(p,type){
+  if(type==='circle'){
+    const cx=.5*W,cy=.5*H,r=.3*W;
+    const dx=p[0]-cx, dy=p[1]-cy;
+    return dx*dx+dy*dy <= r*r;
+  }
+  const poly=getShapePoly(type);
+  return pointInPoly(p,poly);
+}
+function pointInPoly(p,poly){
+  let inside=false;
+  for(let i=0,j=poly.length-1;i<poly.length;j=i++){
+    const xi=poly[i][0], yi=poly[i][1];
+    const xj=poly[j][0], yj=poly[j][1];
+    const intersect=((yi>p[1])!==(yj>p[1])) && (p[0]<(xj-xi)*(p[1]-yi)/(yj-yi)+xi);
+    if(intersect) inside=!inside;
+  }
+  return inside;
+}
+
 function startDraw(e){
   if(phase!=='draw') return;
+  const p=eventPt(e);
+  // 只有在图形内部的触摸才开始画线，图形外的触摸视为页面滚动
+  if(!pointInShape(p,game.type)) return;
   e.preventDefault();
-  drawing=[nearestEnd(eventPt(e)),nearestEnd(eventPt(e))];
+  drawing=[nearestEnd(p),nearestEnd(p)];
   c.setPointerCapture(e.pointerId);
   c.addEventListener('pointermove',moveDraw);
   c.addEventListener('pointerup',endDraw,{once:true});
