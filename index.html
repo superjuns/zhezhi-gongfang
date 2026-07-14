@@ -660,19 +660,55 @@ function pointInPoly(p,poly){
 function startDraw(e){
   if(phase!=='draw') return;
   const p=eventPt(e);
-  // 图形外的触摸直接视为滚动
-  if(!pointInShape(p,game.type)) return;
+  const r=c.getBoundingClientRect();
 
-  // 判断起点是否靠近吸附点（圆点/顶点/中点/中心）
-  // 从吸附点出发 → 直接判定为画线意图，不做方向判断
-  const snaps=getSnapPoints(game.type);
-  let nearSnap=false;
-  for(const q of snaps){
-    if(d(p,q)<30){ nearSnap=true; break; }
-  }
+  // 判断是否在屏幕两侧的滚动带内（左右各占canvas宽度的10%）
+  const xInCanvas = e.clientX - r.left;
+  const edgeWidth = r.width * 0.1;
+  const inLeftEdge = xInCanvas < edgeWidth;
+  const inRightEdge = xInCanvas > r.width - edgeWidth;
+  const inEdgeZone = inLeftEdge || inRightEdge;
 
-  if(nearSnap){
-    // 从吸附点开始 → 立即画线
+  if(inEdgeZone){
+    // 在边缘区域 → 先移动一小段判断方向
+    // 纯竖向拖动（dx很小）→ 页面滚动；有横向分量 → 画线
+    let decided=false;
+    const startX=e.clientX, startY=e.clientY;
+
+    function decide(ev){
+      const dx=Math.abs(ev.clientX-startX);
+      const dy=Math.abs(ev.clientY-startY);
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<10) return;
+
+      decided=true;
+      c.removeEventListener('pointermove',decide);
+      c.removeEventListener('pointerup',cleanup);
+      c.removeEventListener('pointercancel',cleanup);
+
+      // 几乎纯竖向（横向分量小于竖向的1/3）→ 当滚动，不画线
+      if(dx < dy * 0.33) return;
+
+      // 有横向分量 → 画线
+      ev.preventDefault();
+      drawing=[nearestEnd(p),nearestEnd(eventPt(ev))];
+      c.setPointerCapture(ev.pointerId);
+      c.addEventListener('pointermove',moveDraw);
+      c.addEventListener('pointerup',endDraw,{once:true});
+      c.addEventListener('pointercancel',endDraw,{once:true});
+      draw();
+    }
+    function cleanup(){
+      if(decided) return;
+      c.removeEventListener('pointermove',decide);
+      c.removeEventListener('pointerup',cleanup);
+      c.removeEventListener('pointercancel',cleanup);
+    }
+    c.addEventListener('pointermove',decide);
+    c.addEventListener('pointerup',cleanup,{once:true});
+    c.addEventListener('pointercancel',cleanup,{once:true});
+  } else {
+    // 中间区域 → 直接画线
     e.preventDefault();
     drawing=[nearestEnd(p),nearestEnd(p)];
     c.setPointerCapture(e.pointerId);
@@ -680,47 +716,7 @@ function startDraw(e){
     c.addEventListener('pointerup',endDraw,{once:true});
     c.addEventListener('pointercancel',endDraw,{once:true});
     draw();
-    return;
   }
-
-  // 从图形空白处出发 → 先移动一小段判断方向：
-  // 纯竖向（dy远大于dx）→ 页面滚动；有横向分量 → 画线
-  let decided=false;
-  const startX=e.clientX, startY=e.clientY;
-
-  function decide(ev){
-    const dx=Math.abs(ev.clientX-startX);
-    const dy=Math.abs(ev.clientY-startY);
-    const dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist<10) return;
-
-    decided=true;
-    c.removeEventListener('pointermove',decide);
-    c.removeEventListener('pointerup',cleanup);
-    c.removeEventListener('pointercancel',cleanup);
-
-    // 有明显横向分量（dx > dy * 0.4）→ 画线
-    // 接近纯竖向（dx很小）→ 当滚动，不画线
-    if(dx < dy * 0.4) return;
-
-    // 判定为画线
-    ev.preventDefault();
-    drawing=[nearestEnd(p),nearestEnd(eventPt(ev))];
-    c.setPointerCapture(ev.pointerId);
-    c.addEventListener('pointermove',moveDraw);
-    c.addEventListener('pointerup',endDraw,{once:true});
-    c.addEventListener('pointercancel',endDraw,{once:true});
-    draw();
-  }
-  function cleanup(){
-    if(decided) return;
-    c.removeEventListener('pointermove',decide);
-    c.removeEventListener('pointerup',cleanup);
-    c.removeEventListener('pointercancel',cleanup);
-  }
-  c.addEventListener('pointermove',decide);
-  c.addEventListener('pointerup',cleanup,{once:true});
-  c.addEventListener('pointercancel',cleanup,{once:true});
 }
 function moveDraw(e){
   if(!drawing) return;
