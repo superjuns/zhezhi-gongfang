@@ -1101,7 +1101,14 @@ tabs.forEach(tab => {
     const mode = tab.dataset.mode;
     if (mode === currentMode) return;
     if (mode === 'challenge') {
-      showNameModal();
+      // 如果已有登录信息（从URL自动登录或本地存储），直接开始闯关
+      const savedCls = localStorage.getItem('origami_class');
+      const savedName = localStorage.getItem('origami_name');
+      if (savedCls && savedName && userName && userClass) {
+        startChallenge();
+      } else {
+        showNameModal();
+      }
     } else {
       switchToFree();
     }
@@ -1164,14 +1171,14 @@ async function tryAutoLoginFromUrl() {
     const ok = await verifyWhitelist(normCls, name);
     if (!ok) return false;
 
-    // 保存到本地
+    // 保存到本地（只存信息，不自动进入闯关模式）
     localStorage.setItem('origami_class', normCls);
     localStorage.setItem('origami_name', name);
     userName = name;
     userClass = normCls;
 
     hideNameModal();
-    startChallenge();
+    // 默认保持自由练习模式，用户点击"答题模式"时直接开始
     return true;
   } catch (e) {
     return false;
