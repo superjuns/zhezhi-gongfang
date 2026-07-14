@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>折纸小工坊</title>
 <style>
-:root{--ink:#243d63;--paper:#f6f7f2;--board:#355a83;--board2:#27496e;--cream:#fff8dd;--line:#e57555;--mint:#a8d4c0;--muted:#718095}*{box-sizing:border-box}body{margin:0;background:var(--paper);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",sans-serif;color:var(--ink);-webkit-tap-highlight-color:transparent}.app{max-width:560px;min-height:100svh;margin:auto;padding:22px 18px calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:16px}header{display:flex;justify-content:space-between;align-items:start}.eyebrow{font-size:12px;letter-spacing:.14em;color:var(--muted);margin:0 0 4px}.title{font-size:25px;letter-spacing:.04em;margin:0}.round{font-size:13px;color:var(--muted);padding-top:5px}.board{background:linear-gradient(140deg,var(--board),var(--board2));border-radius:22px;padding:15px 12px 12px;box-shadow:0 10px 25px #20395118;position:relative;overflow:hidden}.board:before{content:"";position:absolute;inset:8px;border:1px solid #f5f0d735;border-radius:16px;pointer-events:none}.task{position:relative;margin:1px 10px 8px;text-align:center;color:#eff5e9;font-size:15px;line-height:1.5}.task strong{color:#ffe2a0}canvas{display:block;width:100%;height:auto;touch-action:pan-y;user-select:none}.hint{position:relative;margin:5px 0 1px;min-height:19px;text-align:center;color:#dbe9dc;font-size:12px}.hint.good{color:#ffe6a7}.controls{display:grid;grid-template-columns:1fr 1fr;gap:9px}.btn{border:0;border-radius:14px;padding:12px 8px;font:inherit;font-size:14px;font-weight:650;cursor:pointer}.btn:active{transform:scale(.98)}.primary{background:var(--ink);color:#fff}.secondary{background:#e4e9eb;color:var(--ink)}.rule{display:flex;gap:9px;color:var(--muted);font-size:13px;line-height:1.55;padding:0 3px}.dot{width:8px;height:8px;border-radius:50%;background:var(--line);flex:none;margin-top:6px}.toast{position:fixed;left:50%;top:20px;transform:translate(-50%,-140px);background:#27496e;color:#fff6d4;padding:11px 16px;border-radius:99px;font-size:14px;box-shadow:0 8px 22px #243d6338;transition:transform .28s;z-index:3}.toast.show{transform:translate(-50%,0)}@media(max-width:370px){.app{padding-left:12px;padding-right:12px}.title{font-size:22px}.board{padding-left:8px;padding-right:8px;border-radius:18px}}
+:root{--ink:#243d63;--paper:#f6f7f2;--board:#355a83;--board2:#27496e;--cream:#fff8dd;--line:#e57555;--mint:#a8d4c0;--muted:#718095}*{box-sizing:border-box}body{margin:0;background:var(--paper);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans SC",sans-serif;color:var(--ink);-webkit-tap-highlight-color:transparent}.app{max-width:560px;min-height:100svh;margin:auto;padding:22px 18px calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:16px}header{display:flex;justify-content:space-between;align-items:start}.eyebrow{font-size:12px;letter-spacing:.14em;color:var(--muted);margin:0 0 4px}.title{font-size:25px;letter-spacing:.04em;margin:0}.round{font-size:13px;color:var(--muted);padding-top:5px}.board{background:linear-gradient(140deg,var(--board),var(--board2));border-radius:22px;padding:15px 12px 12px;box-shadow:0 10px 25px #20395118;position:relative;overflow:hidden}.board:before{content:"";position:absolute;inset:8px;border:1px solid #f5f0d735;border-radius:16px;pointer-events:none}.task{position:relative;margin:1px 10px 8px;text-align:center;color:#eff5e9;font-size:15px;line-height:1.5}.task strong{color:#ffe2a0}.canvas-wrap{position:relative}.scroll-edge{position:absolute;top:0;bottom:0;width:10%;z-index:2;touch-action:pan-y}.scroll-edge-left{left:0}.scroll-edge-right{right:0}canvas{display:block;width:100%;height:auto;touch-action:none;user-select:none}.hint{position:relative;margin:5px 0 1px;min-height:19px;text-align:center;color:#dbe9dc;font-size:12px}.hint.good{color:#ffe6a7}.controls{display:grid;grid-template-columns:1fr 1fr;gap:9px}.btn{border:0;border-radius:14px;padding:12px 8px;font:inherit;font-size:14px;font-weight:650;cursor:pointer}.btn:active{transform:scale(.98)}.primary{background:var(--ink);color:#fff}.secondary{background:#e4e9eb;color:var(--ink)}.rule{display:flex;gap:9px;color:var(--muted);font-size:13px;line-height:1.55;padding:0 3px}.dot{width:8px;height:8px;border-radius:50%;background:var(--line);flex:none;margin-top:6px}.toast{position:fixed;left:50%;top:20px;transform:translate(-50%,-140px);background:#27496e;color:#fff6d4;padding:11px 16px;border-radius:99px;font-size:14px;box-shadow:0 8px 22px #243d6338;transition:transform .28s;z-index:3}.toast.show{transform:translate(-50%,0)}@media(max-width:370px){.app{padding-left:12px;padding-right:12px}.title{font-size:22px}.board{padding-left:8px;padding-right:8px;border-radius:18px}}
 /* ===== tab切换 ===== */
 .tabs{display:flex;gap:6px;background:#e8ecef;padding:4px;border-radius:12px;margin-bottom:2px}.tab{flex:1;padding:8px 4px;text-align:center;font-size:13px;font-weight:600;color:var(--muted);border-radius:9px;cursor:pointer;transition:all .2s}.tab.active{background:#fff;color:var(--ink);box-shadow:0 2px 6px #243d6315}
 /* ===== 弹窗 ===== */
@@ -19,7 +19,7 @@
 <body><main class="app"><header><div><p class="eyebrow">PAPER FOLD STUDIO</p><h1 class="title">折纸小工坊</h1></div><div class="round" id="round">第 1 题</div></header>
 <div class="tabs"><div class="tab active" data-mode="free">自由练习</div><div class="tab" data-mode="challenge">答题模式</div></div>
 <div id="challengeHeader" style="display:none" class="challenge-header"><span class="score" id="challengeScore">答对：0 次</span><span class="timer" id="timer">02:00</span><button class="end-btn" id="endChallengeBtn">结束</button></div>
-<section class="board" aria-label="折纸画线游戏"><p class="task" id="task"></p><canvas id="paper" width="1000" height="700" aria-label="在纸张上绘制折痕或裁剪线"></canvas><p class="hint" id="hint">从圆点处开始画线，顶点/边中点/中心都会自动吸附</p></section><div class="controls"><button class="btn secondary" id="undo">撤销</button><button class="btn secondary" id="reset">重来</button><button class="btn primary" id="verify">验证</button><button class="btn secondary" id="next">换任务</button></div><div class="rule"><span class="dot"></span><span id="ruleText">在图形的圆点之间画出裁剪线；画好后点击"验证"，剪开后所有部分形状大小相同即为通过。</span></div>
+<section class="board" aria-label="折纸画线游戏"><p class="task" id="task"></p><div class="canvas-wrap"><canvas id="paper" width="1000" height="700" aria-label="在纸张上绘制折痕或裁剪线"></canvas><div class="scroll-edge scroll-edge-left"></div><div class="scroll-edge scroll-edge-right"></div></div><p class="hint" id="hint">从圆点处开始画线，顶点/边中点/中心都会自动吸附</p></section><div class="controls"><button class="btn secondary" id="undo">撤销</button><button class="btn secondary" id="reset">重来</button><button class="btn primary" id="verify">验证</button><button class="btn secondary" id="next">换任务</button></div><div class="rule"><span class="dot"></span><span id="ruleText">在图形的圆点之间画出裁剪线；画好后点击"验证"，剪开后所有部分形状大小相同即为通过。</span></div>
 </main>
 <div class="rank-bottom-wrap"><div id="rankSection" class="rank-section"><p class="rank-title">🏆 今日排行榜<span class="sub" id="rankSub">每人仅显示最佳成绩</span></p><div class="rank-list" id="rankList"><div class="rank-empty">加载中...</div></div></div></div><div class="toast" id="toast" role="status"></div>
 <!-- 白名单弹窗 -->
@@ -660,63 +660,14 @@ function pointInPoly(p,poly){
 function startDraw(e){
   if(phase!=='draw') return;
   const p=eventPt(e);
-  const r=c.getBoundingClientRect();
-
-  // 判断是否在屏幕两侧的滚动带内（左右各占canvas宽度的10%）
-  const xInCanvas = e.clientX - r.left;
-  const edgeWidth = r.width * 0.1;
-  const inLeftEdge = xInCanvas < edgeWidth;
-  const inRightEdge = xInCanvas > r.width - edgeWidth;
-  const inEdgeZone = inLeftEdge || inRightEdge;
-
-  if(inEdgeZone){
-    // 在边缘区域 → 先移动一小段判断方向
-    // 纯竖向拖动（dx很小）→ 页面滚动；有横向分量 → 画线
-    let decided=false;
-    const startX=e.clientX, startY=e.clientY;
-
-    function decide(ev){
-      const dx=Math.abs(ev.clientX-startX);
-      const dy=Math.abs(ev.clientY-startY);
-      const dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<10) return;
-
-      decided=true;
-      c.removeEventListener('pointermove',decide);
-      c.removeEventListener('pointerup',cleanup);
-      c.removeEventListener('pointercancel',cleanup);
-
-      // 几乎纯竖向（横向分量小于竖向的1/3）→ 当滚动，不画线
-      if(dx < dy * 0.33) return;
-
-      // 有横向分量 → 画线
-      ev.preventDefault();
-      drawing=[nearestEnd(p),nearestEnd(eventPt(ev))];
-      c.setPointerCapture(ev.pointerId);
-      c.addEventListener('pointermove',moveDraw);
-      c.addEventListener('pointerup',endDraw,{once:true});
-      c.addEventListener('pointercancel',endDraw,{once:true});
-      draw();
-    }
-    function cleanup(){
-      if(decided) return;
-      c.removeEventListener('pointermove',decide);
-      c.removeEventListener('pointerup',cleanup);
-      c.removeEventListener('pointercancel',cleanup);
-    }
-    c.addEventListener('pointermove',decide);
-    c.addEventListener('pointerup',cleanup,{once:true});
-    c.addEventListener('pointercancel',cleanup,{once:true});
-  } else {
-    // 中间区域 → 直接画线
-    e.preventDefault();
-    drawing=[nearestEnd(p),nearestEnd(p)];
-    c.setPointerCapture(e.pointerId);
-    c.addEventListener('pointermove',moveDraw);
-    c.addEventListener('pointerup',endDraw,{once:true});
-    c.addEventListener('pointercancel',endDraw,{once:true});
-    draw();
-  }
+  // canvas 整个区域都是画线（左右两侧滚动带由 DOM 层处理滚动，不在 canvas 上触发
+  e.preventDefault();
+  drawing=[nearestEnd(p),nearestEnd(p)];
+  c.setPointerCapture(e.pointerId);
+  c.addEventListener('pointermove',moveDraw);
+  c.addEventListener('pointerup',endDraw,{once:true});
+  c.addEventListener('pointercancel',endDraw,{once:true});
+  draw();
 }
 function moveDraw(e){
   if(!drawing) return;
