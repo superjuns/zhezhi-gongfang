@@ -660,15 +660,50 @@ function pointInPoly(p,poly){
 function startDraw(e){
   if(phase!=='draw') return;
   const p=eventPt(e);
-  // 只有在图形内部的触摸才开始画线，图形外的触摸视为页面滚动
+  // 图形外的触摸直接视为滚动
   if(!pointInShape(p,game.type)) return;
-  e.preventDefault();
-  drawing=[nearestEnd(p),nearestEnd(p)];
-  c.setPointerCapture(e.pointerId);
-  c.addEventListener('pointermove',moveDraw);
-  c.addEventListener('pointerup',endDraw,{once:true});
-  c.addEventListener('pointercancel',endDraw,{once:true});
-  draw();
+
+  // 先不立即画线，等移动一小段后判断方向：
+  // 竖向（dy > dx）→ 页面滚动；横向/斜向 → 画线
+  let started=false;
+  const startX=e.clientX, startY=e.clientY;
+
+  function decide(ev){
+    const dx=Math.abs(ev.clientX-startX);
+    const dy=Math.abs(ev.clientY-startY);
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<8) return; // 移动距离太小，继续等
+
+    if(dy > dx * 1.3){
+      // 竖向为主 → 页面滚动，取消画线
+      cleanup();
+      return;
+    }
+    // 横向/斜向 → 开始画线
+    started=true;
+    ev.preventDefault();
+    drawing=[nearestEnd(p),nearestEnd(eventPt(ev))];
+    c.setPointerCapture(ev.pointerId);
+    c.addEventListener('pointermove',moveDraw);
+    c.addEventListener('pointerup',endDraw,{once:true});
+    c.addEventListener('pointercancel',endDraw,{once:true});
+    draw();
+    // 移走判断用的 move 监听
+    c.removeEventListener('pointermove',decide);
+    c.removeEventListener('pointerup',onUp);
+    c.removeEventListener('pointercancel',cleanup);
+  }
+  function onUp(ev){
+    cleanup();
+  }
+  function cleanup(){
+    c.removeEventListener('pointermove',decide);
+    c.removeEventListener('pointerup',onUp);
+    c.removeEventListener('pointercancel',cleanup);
+  }
+  c.addEventListener('pointermove',decide);
+  c.addEventListener('pointerup',onUp,{once:true});
+  c.addEventListener('pointercancel',cleanup,{once:true});
 }
 function moveDraw(e){
   if(!drawing) return;
