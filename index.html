@@ -1264,6 +1264,7 @@ function startChallenge() {
   currentMode = 'challenge';
   setTabActive('challenge');
   document.getElementById('challengeHeader').style.display = 'flex';
+  document.getElementById('endChallengeBtn').textContent = '结束';
 
   challengeScore = 0;
   timeLeft = CHALLENGE_SECONDS;
@@ -1280,10 +1281,15 @@ function startChallenge() {
 
 // 结束闯关按钮
 document.getElementById('endChallengeBtn').onclick = () => {
-  if (currentMode !== 'challenge' || challengeEnded) return;
-  if (confirm('确定要结束本次闯关吗？')) {
+  if (currentMode !== 'challenge') return;
+  if (!challengeEnded) {
+    // 进行中 → 点击结束
     stopTimer();
     endChallenge();
+  } else {
+    // 已结束 → 点击再来一次
+    document.getElementById('endModal').classList.remove('show');
+    startChallenge();
   }
 };
 
@@ -1327,6 +1333,7 @@ function endChallenge() {
   if (challengeEnded) return;
   challengeEnded = true;
   stopTimer();
+  document.getElementById('endChallengeBtn').textContent = '再来一次';
 
   const endModal = document.getElementById('endModal');
   document.getElementById('endScore').textContent = challengeScore;
