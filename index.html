@@ -663,24 +663,47 @@ function startDraw(e){
   // 图形外的触摸直接视为滚动
   if(!pointInShape(p,game.type)) return;
 
-  // 先不立即画线，等移动一小段后判断方向：
-  // 竖向（dy > dx）→ 页面滚动；横向/斜向 → 画线
-  let started=false;
+  // 判断起点是否靠近吸附点（圆点/顶点/中点/中心）
+  // 从吸附点出发 → 直接判定为画线意图，不做方向判断
+  const snaps=getSnapPoints(game.type);
+  let nearSnap=false;
+  for(const q of snaps){
+    if(d(p,q)<30){ nearSnap=true; break; }
+  }
+
+  if(nearSnap){
+    // 从吸附点开始 → 立即画线
+    e.preventDefault();
+    drawing=[nearestEnd(p),nearestEnd(p)];
+    c.setPointerCapture(e.pointerId);
+    c.addEventListener('pointermove',moveDraw);
+    c.addEventListener('pointerup',endDraw,{once:true});
+    c.addEventListener('pointercancel',endDraw,{once:true});
+    draw();
+    return;
+  }
+
+  // 从图形空白处出发 → 先移动一小段判断方向：
+  // 纯竖向（dy远大于dx）→ 页面滚动；有横向分量 → 画线
+  let decided=false;
   const startX=e.clientX, startY=e.clientY;
 
   function decide(ev){
     const dx=Math.abs(ev.clientX-startX);
     const dy=Math.abs(ev.clientY-startY);
     const dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist<8) return; // 移动距离太小，继续等
+    if(dist<10) return;
 
-    if(dy > dx * 1.3){
-      // 竖向为主 → 页面滚动，取消画线
-      cleanup();
-      return;
-    }
-    // 横向/斜向 → 开始画线
-    started=true;
+    decided=true;
+    c.removeEventListener('pointermove',decide);
+    c.removeEventListener('pointerup',cleanup);
+    c.removeEventListener('pointercancel',cleanup);
+
+    // 有明显横向分量（dx > dy * 0.4）→ 画线
+    // 接近纯竖向（dx很小）→ 当滚动，不画线
+    if(dx < dy * 0.4) return;
+
+    // 判定为画线
     ev.preventDefault();
     drawing=[nearestEnd(p),nearestEnd(eventPt(ev))];
     c.setPointerCapture(ev.pointerId);
@@ -688,21 +711,15 @@ function startDraw(e){
     c.addEventListener('pointerup',endDraw,{once:true});
     c.addEventListener('pointercancel',endDraw,{once:true});
     draw();
-    // 移走判断用的 move 监听
-    c.removeEventListener('pointermove',decide);
-    c.removeEventListener('pointerup',onUp);
-    c.removeEventListener('pointercancel',cleanup);
-  }
-  function onUp(ev){
-    cleanup();
   }
   function cleanup(){
+    if(decided) return;
     c.removeEventListener('pointermove',decide);
-    c.removeEventListener('pointerup',onUp);
+    c.removeEventListener('pointerup',cleanup);
     c.removeEventListener('pointercancel',cleanup);
   }
   c.addEventListener('pointermove',decide);
-  c.addEventListener('pointerup',onUp,{once:true});
+  c.addEventListener('pointerup',cleanup,{once:true});
   c.addEventListener('pointercancel',cleanup,{once:true});
 }
 function moveDraw(e){
