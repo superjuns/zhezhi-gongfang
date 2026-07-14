@@ -9,7 +9,7 @@
 /* ===== 弹窗 ===== */
 .modal-overlay{position:fixed;inset:0;background:#243d6360;display:none;align-items:center;justify-content:center;z-index:10;padding:20px}.modal-overlay.show{display:flex}.modal-box{background:#fff;border-radius:18px;padding:22px 18px;width:100%;max-width:360px;box-shadow:0 20px 50px #243d6340}.modal-title{font-size:18px;font-weight:700;margin:0 0 4px;color:var(--ink)}.modal-sub{font-size:12px;color:var(--muted);margin-bottom:14px}.modal-form{display:flex;flex-direction:column;gap:10px}.modal-input{width:100%;padding:11px 12px;border:1.5px solid #dbe3e8;border-radius:10px;font-size:14px;font-family:inherit;outline:none;box-sizing:border-box}.modal-input:focus{border-color:var(--board)}.modal-btn{width:100%;padding:12px;border:0;border-radius:10px;background:var(--ink);color:#fff;font-size:14px;font-weight:650;cursor:pointer;font-family:inherit}.modal-btn:active{transform:scale(.98)}.modal-btn.secondary{background:#e4e9eb;color:var(--ink)}.modal-error{color:#e57555;font-size:12px;margin-top:-4px;min-height:16px}
 /* ===== 答题模式头部 ===== */
-.challenge-header{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--board),var(--board2));color:#fff;padding:10px 14px;border-radius:12px;font-size:13px}.challenge-header .timer{font-weight:700;font-size:16px;color:#ffe2a0}.challenge-header .score{font-weight:650}
+.challenge-header{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--board),var(--board2));color:#fff;padding:10px 14px;border-radius:12px;font-size:13px}.challenge-header .timer{font-weight:700;font-size:16px;color:#ffe2a0}.challenge-header .score{font-weight:650}.challenge-header .end-btn{background:rgba(255,255,255,.2);color:#fff;border:none;border-radius:8px;padding:4px 12px;font-size:12px;cursor:pointer;font-weight:600;backdrop-filter:blur(4px)}.challenge-header .end-btn:hover{background:rgba(255,255,255,.3)}
 /* ===== 排行榜 ===== */
 .rank-section{background:#fff;border-radius:16px;padding:14px;box-shadow:0 4px 14px #243d6310}.rank-title{font-size:15px;font-weight:700;margin:0 0 10px;color:var(--ink);display:flex;justify-content:space-between;align-items:center}.rank-title .sub{font-size:11px;font-weight:500;color:var(--muted)}.rank-list{display:flex;flex-direction:column;gap:6px}.rank-item{display:flex;align-items:center;gap:10px;padding:8px 10px;background:#f6f7f2;border-radius:10px;font-size:13px}.rank-item.me{background:linear-gradient(135deg,#fff8dd,#ffeac8)}.rank-no{width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#e4e9eb;font-size:11px;font-weight:700;color:var(--muted);flex:none}.rank-item:nth-child(1) .rank-no{background:#ffd93d;color:#8a6d00}.rank-item:nth-child(2) .rank-no{background:#c8d6e5;color:#576574}.rank-item:nth-child(3) .rank-no{background:#f0c090;color:#8b5e3c}.rank-name{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rank-class{font-size:11px;color:var(--muted);margin-left:4px}.rank-score{font-weight:700;color:var(--board)}.rank-empty{text-align:center;color:var(--muted);font-size:12px;padding:20px 0}
 /* 排行榜固定在页面底部 */
@@ -18,7 +18,7 @@
 </head>
 <body><main class="app"><header><div><p class="eyebrow">PAPER FOLD STUDIO</p><h1 class="title">折纸小工坊</h1></div><div class="round" id="round">第 1 题</div></header>
 <div class="tabs"><div class="tab active" data-mode="free">自由练习</div><div class="tab" data-mode="challenge">答题模式</div></div>
-<div id="challengeHeader" style="display:none" class="challenge-header"><span class="score" id="challengeScore">答对：0 次</span><span class="timer" id="timer">02:00</span></div>
+<div id="challengeHeader" style="display:none" class="challenge-header"><span class="score" id="challengeScore">答对：0 次</span><span class="timer" id="timer">02:00</span><button class="end-btn" id="endChallengeBtn">结束</button></div>
 <section class="board" aria-label="折纸画线游戏"><p class="task" id="task"></p><canvas id="paper" width="1000" height="700" aria-label="在纸张上绘制折痕或裁剪线"></canvas><p class="hint" id="hint">从圆点处开始画线，顶点/边中点/中心都会自动吸附</p></section><div class="controls"><button class="btn secondary" id="undo">撤销</button><button class="btn secondary" id="reset">重来</button><button class="btn primary" id="verify">验证</button><button class="btn secondary" id="next">换任务</button></div><div class="rule"><span class="dot"></span><span id="ruleText">在图形的圆点之间画出裁剪线；画好后点击"验证"，剪开后所有部分形状大小相同即为通过。</span></div>
 </main>
 <div class="rank-bottom-wrap"><div id="rankSection" class="rank-section"><p class="rank-title">🏆 今日排行榜<span class="sub" id="rankSub">每人仅显示最佳成绩</span></p><div class="rank-list" id="rankList"><div class="rank-empty">加载中...</div></div></div></div><div class="toast" id="toast" role="status"></div>
@@ -1253,6 +1253,15 @@ function startChallenge() {
   newGame();
   loadRank();
 }
+
+// 结束闯关按钮
+document.getElementById('endChallengeBtn').onclick = () => {
+  if (currentMode !== 'challenge' || challengeEnded) return;
+  if (confirm('确定要结束本次闯关吗？')) {
+    stopTimer();
+    endChallenge();
+  }
+};
 
 function updateScore() {
   document.getElementById('challengeScore').textContent = `答对：${challengeScore} 次`;
