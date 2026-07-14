@@ -1282,12 +1282,10 @@ function startChallenge() {
 document.getElementById('endChallengeBtn').onclick = () => {
   if (currentMode !== 'challenge') return;
   if (!challengeEnded) {
-    // 进行中 → 点击结束
-    stopTimer();
+    // 进行中 → 点击结束（只结束当前游戏，不弹窗，不提交）
     endChallenge();
   } else {
-    // 已结束 → 点击再来一次
-    document.getElementById('endModal').classList.remove('show');
+    // 已结束 → 点击开始，重新开始
     startChallenge();
   }
 };
@@ -1332,15 +1330,7 @@ function endChallenge() {
   if (challengeEnded) return;
   challengeEnded = true;
   stopTimer();
-  document.getElementById('endChallengeBtn').textContent = '再来一次';
-
-  const endModal = document.getElementById('endModal');
-  document.getElementById('endScore').textContent = challengeScore;
-  document.getElementById('endError').textContent = '';
-  endModal.classList.add('show');
-
-  // 提交成绩
-  submitScore();
+  document.getElementById('endChallengeBtn').textContent = '开始';
 }
 
 document.getElementById('retryBtn').onclick = () => {
