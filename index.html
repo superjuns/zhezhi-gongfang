@@ -1479,7 +1479,8 @@ async function submitScore() {
         姓名: userName,
         班级: userClass,
         闯关数: challengeScore,
-        用时秒: usedTime
+        用时秒: usedTime,
+        submitted_at: new Date().toISOString()
       })
     });
     if (res.ok) {
